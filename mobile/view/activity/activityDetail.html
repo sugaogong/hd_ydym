@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>活动详情</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+	<ion-view hide-tabs>
+		<ion-content class="bg_f">
+			<!--swiper-->
+			<div class="swiper-container contractDetailSwiper activityDetailSwiper">
+			  	<div class="swiper-wrapper">
+				    <div class="swiper-slide" style="background: url({{activityData.imgs}}) center bottom no-repeat; background-size: 100% auto;">
+				    </div>
+			  	</div>
+   				<div class="swiper-pagination"></div>
+			</div>
+			<!--swiper end-->
+			<!-- info -->
+			<div class="branDescInfo">
+				<dl>
+					<dt>{{activityData.title}}</dt>
+					<dd>{{activityData.disc}}</dd>
+				</dl>
+			</div>
+			<!-- info end-->
+			<!-- main -->
+			<div class="branDescMain" ng-bind-html="activityData.content | to_trusted"></div>
+			<!-- main end -->
+		</ion-content>
+	</ion-view>	
+  </body>
+</html>

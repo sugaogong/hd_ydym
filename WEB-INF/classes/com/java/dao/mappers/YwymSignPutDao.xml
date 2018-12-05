@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymSignPutDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.sign_id AS "signId",
+		a.name AS "name",
+		a.put_type_id AS "putTypeId",
+		a.put_place AS "putPlace",
+		a.remark AS "remark",
+		a.extend AS "extend",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_sign_put` a 
+	</sql>
+	
+	<select id="get" resultType="YwymSignPut">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_sign_put` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymSignPut">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_sign_put` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymSignPut">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+		<if test="signId != null and signId != ''">
+    		AND a.sign_id = #{signId}
+    	</if>
+		<if test="name != null and name != ''">
+    		AND a.name = #{name}
+    	</if>
+		<if test="putTypeId != null and putTypeId != ''">
+    		AND a.put_type_id = #{putTypeId}
+    	</if>
+    	<if test="putPlace != null and putPlace != ''">
+    		AND a.put_place = #{putPlace}
+    	</if>
+		<if test="remark != null and remark != ''">
+    		AND a.remark = #{remark}
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_sign_put(
+		            	id,
+        	sign_id,
+        	name,
+        	put_type_id,
+        	put_place,
+        	remark,
+        	extend,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{signId},
+        	#{name},
+        	#{putTypeId},
+        	#{putPlace},
+        	#{remark},
+        	#{extend},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_sign_put SET 	
+		    			sign_id = #{signId},
+			name = #{name},
+			put_type_id = #{putTypeId},
+			put_place = #{putPlace},
+			remark = #{remark},
+			extend = #{extend},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_sign_put
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

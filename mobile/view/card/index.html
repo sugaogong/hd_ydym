@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>品牌详情</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+	<ion-view hide-tabs>
+		<div class="bar bar-header contractHeader">
+			<ul>
+				<li ng-class="{true:'cur',false:''}[menuIndex == 0]" ng-click="contractMenu(0,0)">
+					<span>未兑换</span>
+				</li>
+				<li ng-class="{true:'cur',false:''}[menuIndex == 1]" ng-click="contractMenu(1,1)">
+					<span>已兑换</span>
+				</li>
+				<li ng-class="{true:'cur',false:''}[menuIndex == 2]" ng-click="contractMenu(2,2)">
+					<span>已核销</span>
+				</li>
+			</ul>
+		</div>
+		<ion-content>
+			<div style="height: 58px;"></div>
+			<!-- list -->
+			<div class="cardList">
+				<!-- cardItem -->
+				<div class="cardItem" ng-repeat="item in signData">
+					<div class="cardItemLeft">
+						<p>
+							<input type="checkbox" value="{{item.id}}" data-nums="{{item.nums}}" ng-model="allChecked" ng-change="changeCheckbox($event)" />
+						</p>
+					</div>
+					<a href="javascript:void(0)">
+						<div class="cardItemOuter">
+							<div class="cardItemImg">
+								<img src="{{item.img}}" />
+							</div>
+							<div class="cardItemMain">
+								<dl>
+									<dt>{{item.title}}</dt>
+									<dd>{{item.guige}}<span style="margin-left: 12px;">数量：{{item.nums}}</span></dd> 
+									<dd>兑换期限：{{item.changeTime}}</dd>
+								</dl>
+							</div>
+						</div>	
+					</a>
+				</div>
+				<!-- cardItem end -->
+			</div>
+			<!-- list end -->
+			<div style="height: 58px;"></div>
+		</ion-content>
+		<div class="cardListFooter">
+			<label>
+				<input type="checkbox" id="all" ng-model="allChecked" ng-change="allCheckbox($event)"  /> 全选
+			</label>
+			<p>合计：<span>{{total}}件</span></p>
+			<a href="javascript:void(0)" ng-click="exchangeCard()">确认兑换</a>
+		</div>
+	</ion-view>	
+  </body>
+</html>

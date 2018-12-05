@@ -1,0 +1,39 @@
+@charset "utf-8";
+/*CSS reset*/ 
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td{ margin: 0; padding: 0; }
+table { border-collapse: collapse; border-spacing: 0; }
+fieldset, img { border: 0 }
+address, caption, cite, code, dfn, em, th, var { font-style: normal; font-weight: normal }
+strong{ font-style: normal;}
+th{font-weight:bold;}
+input{ outline:0;}
+ol, ul { list-style: none }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal }
+q:before, q:after { content: '' }
+abbr, acronym { border: 0 }
+a { text-decoration: none;color:#666666;outline:none;cursor: pointer;}
+.none{ display: none;}
+a:active,a:hover,a:visited{border:none; color: #666;}
+html{*overflow:auto;}
+textarea{resize:none;}
+input[type=number],input[type=submit]{-webkit-appearance: none;}
+@font-face {
+    font-family: "ziti";
+    src: url("../fonts/Montserrat-Bold.ttf"),
+    	url("../fonts/Montserrat-Regular.ttf"),
+}
+body{ font-size:12px; font-family:"ziti" !important; width:100%; min-width:320px; background: #f5f5f5;}
+.fl{ float: left;}
+.fr{ float: right;}
+.dn{display: none;}
+.tc{ text-align: center;}
+.link{ color: #005cce;}
+.fff{ background: #fff;}
+.outer{ width: 1000px; height: auto; overflow: hidden; margin: 0px auto;}
+.bg_f{background: #fff;}
+
+.br3{ border-radius: 3px; -o-border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px;}
+.br6{ border-radius: 6px; -o-border-radius: 6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; -ms-border-radius: 6px;}
+
+.w1400{ width: 100%; max-width: 1400px; margin: 0px auto;}
+.w1204{ width: 100%; max-width: 1204px; margin: 0px auto;}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view hide-tabs class="contractDetailOuter">
+			<ion-content>
+				<!--swiper-->
+				<div class="swiper-container contractDetailSwiper">
+				  	<div class="swiper-wrapper">
+					    <div class="swiper-slide" ng-repeat="item in imgs">
+					    	<img src="{{item}}" />
+					    </div>
+				  	</div>
+    				<div class="swiper-pagination"></div>
+				</div>
+				<!--swiper end-->
+				<!--header-->
+				<div class="contractDetailHeader">
+					<span class="title">{{data.title}}</span>
+				</div>
+				<!--header end-->
+				<!--desc-->
+				<div class="contractDetail">
+					<div class="contractDetailCont">
+						<p ng-bind-html="data.content || to_trusted"></p>
+					</div>
+				</div>
+				<!--desc end-->
+			</ion-content>
+			<!--button-->
+			<div class="contractDetailbutton">
+				<a href="javascript:void(0)" ng-click="businessAddsign()">签约推广</a>
+			</div>
+			<!--button end-->
+			<!--mask-->
+			<div class="contractDetailMask">
+				<div class="contractDetailMaskOuter">
+					<div class="contractDetailMaskMain">
+						<dl>
+							<dt>申请发起成功</dt>
+							<dd>请耐心等待客服联系您</dd>
+						</dl>
+						<a href="javascript:void(0)" ng-click="closeContractDetailMask()">好的</a>
+					</div>
+				</div>
+			</div>
+			<!--mask end-->
+		</ion-view>	
+	</body>
+</html>

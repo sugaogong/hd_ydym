@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>品牌列表</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+	<ion-view show-tabs>
+		<ion-content class="bg_f">
+		    <!-- list -->
+		    <div class="brandList">
+		    	<ul>
+		    		<li ng-repeat="item in brandList">
+		    			<a href="#brandDesc?id={{item.id}}">
+		    				<span><img src="{{item.icon}}" /></span>
+		    			</a>
+		    		</li>
+		    	</ul>
+		    </div>
+		    <!-- list end -->
+			<div style="height:56px"></div>
+		</ion-content>	 
+		<ion-infinite-scroll></ion-infinite-scroll>
+   	</ion-view> 
+  </body>
+</html>

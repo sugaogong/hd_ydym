@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view show-tabs>
+			<ion-content class="show-footer">
+				<!--list-->
+				<div class="contractList">
+					<!--item-->
+					<div class="contractItem" ng-repeat="item in contractList">
+						<a href="#contractdetail?id={{item.id}}">
+							<span class="icon"></span>
+							<span class="img">
+								<img src="{{item.icon}}" />
+							</span>
+							<dl>
+								<dt>{{item.title}}</dt>
+								<dd>说明：{{item.explains}}</dd>
+							</dl>
+						</a>
+					</div>
+					<!--item end-->
+				</div>
+				<!--list end-->
+			</ion-content>
+		</ion-view>	
+	</body>
+</html>

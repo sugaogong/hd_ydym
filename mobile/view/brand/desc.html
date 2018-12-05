@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>品牌详情</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+	<ion-view hide-tabs>
+		<div class="bar bar-header brandHeader">
+			<ion-scroll direction="x" scrollbar-x="true">
+				<ul style="min-width:100%;width:{{brandMenu.length * 100}}px">
+					<li ng-class="{true:'cur',false:''}[$index == menuIndex]" ng-click="contractMenu(0,0)" ng-repeat="item in brandMenu">
+						<span>{{item.name}}</span>
+					</li>
+				</ul>
+			</ion-scroll>	
+		</div>
+		<ion-content class="bg_f">
+			<div style="height: 58px;"></div>
+			<!--swiper-->
+			<div class="swiper-container contractDetailSwiper">
+			  	<div class="swiper-wrapper">
+				    <div class="swiper-slide" ng-repeat="item in imgs">
+				    	<img src="{{item}}" />
+				    </div>
+			  	</div>
+   				<div class="swiper-pagination"></div>
+			</div>
+			<!--swiper end-->
+			<!-- info -->
+			<div class="branDescInfo">
+				<dl>
+					<dt>{{brandData.title}}</dt>
+					<dd>{{brandData.diec}}</dd>
+				</dl>
+			</div>
+			<!-- info end-->
+			<!-- main -->
+			<div class="branDescMain" ng-bind-html="brandData.brandContent | to_trusted"></div>
+			<!-- main end -->
+		</ion-content>
+	</ion-view>	
+  </body>
+</html>

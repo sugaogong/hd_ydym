@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymCodeUserDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.user_id AS "userId",
+		a.admin_id AS "adminId",
+		a.code_id AS "codeId",
+		a.sign_id AS "signId",
+		a.nums AS "nums",
+		a.exchange_date AS "exchangeDate",
+		a.status AS "status",
+		a.remarks AS "remarks",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_code_user` a 
+	</sql>
+	
+	<select id="get" resultType="YwymCodeUser">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_code_user` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymCodeUser">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_code_user` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymCodeUser">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+		<if test="userId != null and userId != ''">
+    		AND a.user_id = #{userId}
+    	</if>
+		<if test="adminId != null and adminId != ''">
+    		AND a.admin_id = #{adminId}
+    	</if>
+		<if test="codeId != null and codeId != ''">
+    		AND a.code_id = #{codeId}
+    	</if>
+		<if test="signId != null and signId != ''">
+    		AND a.sign_id = #{signId}
+    	</if>
+		<if test="nums != null and nums != ''">
+    		AND a.nums = #{nums}
+    	</if>
+		<if test="exchangeDate != null and exchangeDate != ''">
+    		AND a.exchange_date = #{exchangeDate}
+    	</if>
+		<if test="status != null and status != ''">
+    		AND a.status = #{status}
+    	</if>
+		<if test="remarks != null and remarks != ''">
+    		AND a.remarks = #{remarks}
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_code_user(
+		            	id,
+        	user_id,
+        	admin_id,
+        	code_id,
+        	sign_id,
+        	nums,
+        	exchange_date,
+        	status,
+        	remarks,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{userId},
+        	#{adminId},
+        	#{codeId},
+        	#{signId},
+        	#{nums},
+        	#{exchangeDate},
+        	#{status},
+        	#{remarks},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_code_user SET 	
+		    			user_id = #{userId},
+			admin_id = #{adminId},
+			code_id = #{codeId},
+			sign_id = #{signId},
+			nums = #{nums},
+			exchange_date = #{exchangeDate},
+			status = #{status},
+			remarks = #{remarks},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_code_user
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

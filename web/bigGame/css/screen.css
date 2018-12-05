@@ -1,0 +1,5 @@
+#news .newsMain{ padding: 0px 60px; width: initial;}
+#news .swiper-news{width: 100%;}
+#news .swiper-news li{width: 32%; margin-right: 1.5%;}
+#news .newsMain .swiper-button-next{ margin-right: 0; right: 0px;}
+#news .newsMain .swiper-button-prev{ margin-left: 0; left: 0px;}

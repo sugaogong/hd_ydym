@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymTotalOrderDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.order_no AS "orderNo",
+		a.name AS "name",
+		a.img AS "img",
+		a.product_id AS "productId",
+		a.admin_Id AS "adminId",
+		a.distributor_id AS "distributorId",
+		a.type_id AS "typeId",
+		a.user_id AS "userId",
+		a.user_name AS "userName",
+		a.user_phone AS "userPhone",
+		a.user_address AS "userAddress",
+		a.status AS "status",
+		a.del_flag AS "delFlag",
+		a.remarks AS "remarks",
+		a.total AS "total",
+		a.pay_type AS "payType",
+		a.reason AS "reason",
+		a.confirm_date AS "confirmDate",
+		a.connect_code AS "connectCode",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_total_order` a 
+		<if test="orderName != null and orderName != ''">
+    		,`ywym_user` u
+    	</if>
+	</sql>
+	
+	<select id="get" resultType="YwymTotalOrder">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_total_order` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymTotalOrder">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_total_order` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymTotalOrder">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+    	<if test="id != null and id != ''">
+    		AND a.id = #{id}
+    	</if>
+		<if test="orderNo != null and orderNo != ''">
+    		AND a.order_no = #{orderNo}
+    	</if>
+		<if test="name != null and name != ''">
+    		AND a.name = #{name}
+    	</if>
+		<if test="img != null and img != ''">
+    		AND a.img = #{img}
+    	</if>
+		<if test="adminId != null and adminId != ''">
+    		AND a.admin_Id = #{adminId} 
+    	</if>
+		<if test="distributorId != null and distributorId != ''">
+    		AND a.distributor_id = #{distributorId} 
+    	</if>
+		<if test="productId != null and productId != ''">
+    		AND a.product_id = #{productId}
+    	</if>
+		<if test="typeId != null and typeId != ''">
+    		AND a.type_id = #{typeId}
+    	</if>
+		<if test="payType != null and payType != ''">
+    		AND a.pay_type = #{payType}
+    	</if>
+		<if test="userId != null and userId != ''">
+    		AND a.user_id = #{userId} 
+    	</if>
+    	<if test="orderName != null and orderName != ''">
+    		AND (a.order_no = #{orderName} or  u.shop_name LIKE concat('%',#{orderName},'%')) 
+    		<if test="distributorId != null and distributorId != ''">
+    			and a.user_id = u.id
+    		</if>
+    		<if test="userId != null and userId != ''">
+    			and a.user_id = u.id 
+    		</if>
+    		<if test="adminId != null and adminId != ''">
+    			and  a.user_id = u.id
+    		</if>
+    	</if>
+		<if test="userName != null and userName != ''">
+    		AND a.user_name = #{userName}
+    	</if>
+		<if test="userPhone != null and userPhone != ''">
+    		AND a.user_phone = #{userPhone}
+    	</if>
+		<if test="userAddress != null and userAddress != ''">
+    		AND a.user_address = #{userAddress}
+    	</if>
+		<if test="status != null and status != ''">
+    		AND a.status = #{status}
+    	</if>
+		<if test="delFlag != null and delFlag != ''">
+    		AND a.del_flag = #{delFlag}
+    	</if>
+		<if test="remarks != null and remarks != ''">
+    		AND a.remarks = #{remarks}
+    	</if>
+		<if test="total != null and total != ''">
+    		AND a.total = #{total}
+    	</if>
+		<if test="confirmDate != null and confirmDate != ''">
+    		AND a.confirm_date = #{confirmDate}
+    	</if>
+    	<if test="connectCode != null and connectCode != ''">
+    		AND a.connect_code = #{connectCode}
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_total_order(
+		            	id,
+        	order_no,
+        	name,
+        	img,
+        	product_id,
+        	type_id,
+        	admin_Id,
+        	distributor_id,
+        	user_id,
+        	user_name,
+        	user_phone,
+        	user_address,
+        	status,
+        	del_flag,
+        	remarks,
+        	pay_type,
+        	total,
+        	reason,
+        	confirm_date,
+        	connect_code,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{orderNo},
+        	#{name},
+        	#{img},
+        	#{productId},
+        	#{typeId},
+        	#{adminId},
+        	#{distributorId},
+        	#{userId},
+        	#{userName},
+        	#{userPhone},
+        	#{userAddress},
+        	#{status},
+        	#{delFlag},
+        	#{remarks},
+        	#{payType},
+        	#{total},
+        	#{reason},
+        	#{confirmDate},
+        	#{connectCode},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_total_order SET 	
+		    			order_no = #{orderNo},
+			name = #{name},
+			img = #{img},
+			product_id = #{productId},
+			type_id = #{typeId},
+			admin_Id = #{adminId},
+			distributor_Id = #{distributorId},
+			user_id = #{userId},
+			user_name = #{userName},
+			user_phone = #{userPhone},
+			user_address = #{userAddress},
+			status = #{status},
+			del_flag = #{delFlag},
+			remarks = #{remarks},
+			pay_type = #{payType},
+			total = #{total},
+			reason = #{reason},
+			confirm_date = #{confirmDate},
+			connect_code = #{connectCode},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_total_order
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

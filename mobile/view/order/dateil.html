@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>品牌详情</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+	<ion-view hide-tabs>
+		<ion-content>
+			<!--header-->
+			<div class="orderDetailHeader">
+				<dl>
+					<dt>
+						<span>{{getOrder.userName}}</span>
+						<em>{{getOrder.userPhone}}</em>
+					</dt>
+					<dd>{{getOrder.userAddress}}</dd>
+				</dl>
+			</div>
+			<!--header end-->
+			<!--main-->
+			<div class="orderDetailMain">
+				<!--list-->
+				<div class="orderDetailList">
+					<h3>订单编号：{{getOrder.orderNo}}</h3>
+					<ul>
+						<li ng-repeat="item in getOrder.listOrder">
+							<span class="img">
+								<img src="{{item.img}}" />
+							</span>
+							<dl>
+								<dt>{{item.title}}</dt>
+								<dd>{{item.specifications}}</dd>
+								<dd>
+									<span>数量：{{item.productNums}}</span>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+				<!--list end-->
+				<!--total-->
+				<div class="orderTotal">
+					<span class="label">商品数量</span>
+					<p>{{getOrder.productNums}}</p>
+				</div>
+				<!--total end-->
+			</div>
+			<!--main end-->
+		</ion-content>
+		<!--footer-->
+		<div class="orderDetailFoot">
+			<a href="#myCardVoucherCode?ids={{getOrder.id}}" class="kq">
+				<span>查看卡券</span>
+			</a>
+			<a href="tel:{{getOrder.distributorPhone}}" class="kf">
+				<span>联系客服</span>
+			</a>
+		</div>
+		<!--footer end-->
+	</ion-view>	
+  </body>
+</html>

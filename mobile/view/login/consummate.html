@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view hide-tabs>
+			<ion-content id="registerContent">
+				<ion-scroll>
+					<!--logo-->
+					<div class="loginLogo">
+						<img src="images/logo.png" />
+					</div>
+					<!--logo end-->
+					<!--main-->
+					<div class="registerMain">
+						<!--header-->
+						<div class="loginHeader">
+							<span>完善资料</span>
+							<em>Sign in</em>
+						</div>
+						<!--header end-->
+						<!--form-->
+						<div class="registerFrom">
+							<form id="registerInput">
+								<input type="hidden" name="userId" value="{{userId}}" />
+								<ul>
+									<li>
+										<span class="label"><b>*</b>店铺名称</span>
+										<p>
+											<input type="text" class="_txt" name="shopName" ng-model="$parent.$parent.shopName" placeholder="点击填写" />
+										</p>
+									</li>
+									<li>
+										<span class="label"><b>*</b>手持身份证</span>
+										<p>
+											<span class="cardImg uploadImg">
+												<a href="javascript:void(0)">点击上传</a>
+												<input type="file" name="identityCard" onchange="uploadImg(this)" accept="image/*" />
+											</span>
+										</p>
+									</li>
+									<li>
+										<span class="label"><b>*</b>身份证号码</span>
+										<p>
+											<input type="text" class="_txt" name="cardNo" ng-model="$parent.$parent.cardNo" placeholder="点击填写" />
+										</p>
+									</li>
+									<li>
+										<span class="label"><b>*</b>身份证姓名</span>
+										<p>
+											<input type="text" class="_txt" name="name" ng-model="$parent.$parent.name" placeholder="点击填写" />
+										</p>
+									</li>
+									<li>
+										<span class="label"><b>*</b>营业执照</span>
+										<p>
+											<span class="cardImg uploadImg">
+												<a href="javascript:void(0)">点击上传</a>
+												<input type="file" name="businessImg" onchange="uploadImg(this)" accept="image/*" />
+											</span>
+										</p>
+									</li>
+									<li>
+										<span class="label"><b>*</b>商铺地址</span>
+										<p ng-click="openMap($event)" id="openMap">点击选择</p>
+										<input type="hidden" name="address" value="{{address}}" />
+										<input type="hidden" name="longitude" value="{{lng}}" />
+										<input type="hidden" name="latitude" value="{{lat}}" />
+										<input type="hidden" name="province" value="{{province}}" />
+										<input type="hidden" name="city" value="{{city}}" />
+										<input type="hidden" name="district" value="{{district}}" />
+									</li>
+									<li>
+										<span class="label"><b>*</b>登录密码</span>
+										<p>
+											<input type="password" class="_txt" name="password" ng-model="$parent.$parent.password" placeholder="点击填写" />
+										</p>
+									</li>
+									<li>
+										<span class="label"><b>*</b>手机号码</span>
+										<p>
+											<input type="text" class="_txt" name="phone" ng-model="$parent.$parent.phone" placeholder="点击填写" />
+										</p>
+										<a href="javascript:void(0)" ng-click="sendCode($event)" class="sendCode">验证码</a>
+									</li>
+									<li>
+										<span class="label"><b>*</b>收到的验证码</span>
+										<p>
+											<input type="text" class="_txt" name="code" ng-model="$parent.$parent.code" placeholder="点击填写" />
+										</p>
+									</li>
+									<li>
+										<span class="label"><b>*</b>店铺照片</span>
+										<p style="margin-bottom: 0;">点击上传(最多5张)</p>
+									</li>
+									<li>
+										<ion-scroll direction="x" class="scroll">
+											<div class="itemImgOuter">
+												<span class="itemImgs">
+													<em>x</em>
+													<img src="" />
+													<input type="file" name="shopImg" accept="image/*" />
+												</span>
+											</div>
+										</ion-scroll>
+									</li>
+									<li>
+										<p>
+											<input type="button" ng-click="registerSubmit()" value="提交资料" class="login_btn" />
+										</p>
+									</li>
+								</ul>
+							</form>	
+						</div>
+						<!--form end-->
+					</div>
+					<!--main end-->
+				</ion-scroll>
+			</ion-content>
+		</ion-view>	
+		<!--map-->
+		<div id="map">
+			<div class="mapHeader">
+				<p>详细地址</p>
+				<a href="javascript:void(0)" ng-click="cancelMap()">取消</a>
+			</div>
+			<div class="mapSearch">
+				<p>
+					<input type="text" id="tipinput" class="_txt" placeholder="请输入关键词" />
+				</p>
+			</div>
+			<div class="mapContent" id="mapContainer" style="height: {{mapHeight}}px;">
+				
+			</div>
+			<div class="mapFooter">
+				<p id="mapAddress"></p>
+				<a href="javascript:void(0)" ng-click="chooseMap()">确定</a>
+			</div>
+		</div>
+		<!--map end-->
+	</body>
+	<script>
+		function uploadImg(obj){
+			$(obj).siblings("a").text( $(obj).val() );
+		}
+		$("input[name=shopImg]").live('change',function(){
+			var obj = $(this);
+			var files = event.target.files, file; 
+			if (files && files.length > 0) {
+				file = files[0]; 
+				console.log(file); 
+				var URL = window.URL || window.webkitURL; 
+				var imgURL = URL.createObjectURL(file); 
+				var txt = '<span class="itemImgs">'+
+								'<em>x</em>'+
+								'<img src="" />'+
+								'<input type="file" name="shopImg" />'+
+							'</span>'
+				if(obj.parents(".itemImgOuter").find("img").length < 5){
+					obj.parent(".itemImgs").find("img").css("display","block");
+					obj.parent(".itemImgs").find("em").css("display","block");
+					obj.parent(".itemImgs").find("img").attr("src",imgURL);
+					obj.parents(".itemImgOuter").append(txt);
+				}else{
+					obj.parent(".itemImgs").find("img").css("display","block");
+					obj.parent(".itemImgs").find("em").css("display","block");
+					obj.parent(".itemImgs").find("img").attr("src",imgURL);
+				}
+			} 
+		});
+		$(".itemImgs em").live("click",function(){
+			$(this).parent(".itemImgs").remove();
+		});
+	</script>
+</html>

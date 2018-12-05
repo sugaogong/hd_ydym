@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的签约</title>
+	</head>
+	<body>
+		<ion-view hide-tabs>
+			<div class="bar bar-header contractHeader">
+				<ul>
+					<li ng-class="{true:'cur',false:''}[index == 0]" ng-click="contractMenu(0,0)">
+						<span>全部</span>
+					</li>
+					<li ng-class="{true:'cur',false:''}[index == 1]" ng-click="contractMenu(1,4)">
+						<span>待确认</span>
+					</li>
+					<li ng-class="{true:'cur',false:''}[index == 2]" ng-click="contractMenu(2,2)">
+						<span>待审核</span>
+					</li>
+					<li ng-class="{true:'cur',false:''}[index == 3]" ng-click="contractMenu(3,9)">
+						<span>拍照上传</span>
+					</li>
+				</ul>
+			</div>
+			<ion-content>
+				<div style="height: 58px;"></div>
+				<!--list-->
+				<div class="myContractList" ng-if="signData.length > 0">
+					<!--item-->
+					<div class="myContractItem" ng-repeat="item in signData">
+						<a href="#myContractDetail?id={{item.id}}">
+							<span class="status" ng-if="item.status == 9">拍照上传</span>
+							<span class="status" ng-if="item.status == 4">待确认</span>
+							<span class="status" ng-if="item.status == 2 || item.status == 3 || item.status == 5">待审核</span>
+							<span class="status" ng-if="item.status == 10">已结束</span>
+							<span class="status" ng-if="item.status == 7">已拒绝</span>
+							<span class="status" ng-if="item.status == 8">待开始</span>
+							<span class="img">
+								<img src="{{item.contractIcon }}" />
+							</span>
+							<dl>
+								<dt>{{item.signTypeName}}</dt>
+								<dd>类型：{{item.putTypeJson}}</dd>
+								<dd>说明：{{item.explains}}</dd>
+							</dl>
+						</a>
+					</div>
+					<!--item end-->
+				</div>
+				<div class="myContractList" ng-if="signData.length < 1">
+					<div class="nodata">{{nodata}}</div>
+				</div>
+				<!--list end-->
+				<ion-infinite-scroll on-infinite="loadMore()" ng-if="moreDataCanBeLoaded"></ion-infinite-scroll>
+			</ion-content>
+		</ion-view>	
+	</body>
+</html>

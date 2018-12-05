@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymCodeTypeDao">
+
+	<sql id="tableColumns">
+		a.id AS "id",
+		a.code_no AS "codeNo",
+		a.img AS "img",
+		a.title AS "title",
+		a.diec AS "diec",
+		a.specifications AS
+		"specifications",
+		a.content AS "content",
+		a.stock AS "stock",
+		a.real_stock AS "realStock",
+		a.hot_status AS "hotStatus",
+		a.type_id AS
+		"typeId",
+		a.auth_status AS "authStatus",
+		a.browse AS "browse",
+		a.price AS
+		"price",
+		a.remarks AS "remarks",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+
+	<sql id="fromTable">
+		`ywym_code_type` a
+	</sql>
+
+	<select id="get" resultType="YwymCodeType">
+		SELECT
+		<include refid="tableColumns" />
+		FROM
+		`ywym_code_type` a
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="fromTable" resultType="YwymCodeType">
+		SELECT
+		<include refid="tableColumns" />
+		FROM
+		`ywym_code_type` a ${sql }
+	</select>
+
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+
+	<select id="findList" resultType="YwymCodeType">
+		SELECT
+		<include refid="tableColumns" />
+		FROM
+		<include refid="fromTable" />
+		<where>
+			<include refid="whereSQL" />
+		</where>
+		<choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+		<if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+	</select>
+
+	<sql id="whereSQL">
+		<if test="codeNo != null and codeNo != ''">
+			AND a.code_no = #{codeNo}
+		</if>
+		<if test="img != null and img != ''">
+			AND a.img = #{img}
+		</if>
+		<if test="title != null and title != ''">
+			AND a.title = #{title}
+		</if>
+		<if test="diec != null and diec != ''">
+			AND a.diec = #{diec}
+		</if>
+		<if test="specifications != null and specifications != ''">
+			AND a.specifications = #{specifications}
+		</if>
+		<if test="content != null and content != ''">
+			AND a.content = #{content}
+		</if>
+		<if test="stock != null and stock != ''">
+			AND a.stock = #{stock}
+		</if>
+		<if test="realStock != null and realStock != ''">
+			AND a.real_stock = #{realStock}
+		</if>
+		<if test="hotStatus != null and hotStatus != ''">
+			AND a.hot_status = #{hotStatus}
+		</if>
+		<if test="typeId != null and typeId != ''">
+			AND a.type_id = #{typeId}
+		</if>
+		<if test="authStatus != null and authStatus != ''">
+			AND a.auth_status = #{authStatus}
+		</if>
+		<if test="browse != null and browse != ''">
+			AND a.browse = #{browse}
+		</if>
+		<if test="price != null and price != ''">
+			AND a.price = #{price}
+		</if>
+		<if test="remarks != null and remarks != ''">
+			AND a.remarks = #{remarks}
+		</if>
+		<if test="createDate != null and createDate != ''">
+			AND a.create_date = #{createDate}
+		</if>
+		<if test="updateDate != null and updateDate != ''">
+			AND a.update_date = #{updateDate}
+		</if>
+		<if
+			test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+			AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+		</if>
+		<if
+			test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+			AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+		</if>
+	</sql>
+
+	<insert id="insert">
+		INSERT INTO ywym_code_type(
+		id,
+		code_no,
+		img,
+		title,
+		diec,
+		specifications,
+		content,
+		stock,
+		real_stock,
+		hot_status,
+		type_id,
+		auth_status,
+		browse,
+		price,
+		remarks,
+		create_date,
+		update_date
+		) VALUES (
+		#{id},
+		#{codeNo},
+		#{img},
+		#{title},
+		#{diec},
+		#{specifications},
+		#{content},
+		#{stock},
+		#{realStock},
+		#{hotStatus},
+		#{typeId},
+		#{authStatus},
+		#{browse},
+		#{price},
+		#{remarks},
+		#{createDate},
+		#{updateDate}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE ywym_code_type SET
+		code_no = #{codeNo},
+		img = #{img},
+		title = #{title},
+		diec = #{diec},
+		specifications = #{specifications},
+		content = #{content},
+		stock = #{stock},
+		real_stock = #{realStock},
+		hot_status = #{hotStatus},
+		type_id = #{typeId},
+		auth_status = #{authStatus},
+		browse = #{browse},
+		price = #{price},
+		remarks = #{remarks},
+		create_date = #{createDate},
+		update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		DELETE FROM ywym_code_type
+		WHERE id = #{id}
+	</update>
+
+	<select id="getCount" resultType="Integer">
+		SELECT
+		count(1)
+		FROM
+		<include refid="fromTable" />
+		<where>
+			<include refid="whereSQL" />
+		</where>
+	</select>
+
+</mapper>

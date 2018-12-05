@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymActivityDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.imgs AS "imgs",
+		a.title AS "title",
+		a.disc AS "disc",
+		a.abstracts AS "abstracts",
+		a.activity_date AS "activityDate",
+		a.content AS "content",
+		a.hot AS "hot",
+		a.flag AS "flag",
+		a.remarks AS "remarks",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_activity` a 
+	</sql>
+	
+	<select id="get" resultType="YwymActivity">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_activity` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymActivity">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_activity` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymActivity">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+		<if test="imgs != null and imgs != ''">
+    		AND a.imgs = #{imgs}
+    	</if>
+		<if test="title != null and title != ''">
+    		AND a.title LIKE concat('%',#{title},'%')
+    	</if>
+		<if test="disc != null and disc != ''">
+    		AND a.disc = #{disc}
+    	</if>
+		<if test="abstracts != null and abstracts != ''">
+    		AND a.abstracts = #{abstracts}
+    	</if>
+		<if test="content != null and content != ''">
+    		AND a.content = #{content}
+    	</if>
+		<if test="hot != null and hot != ''">
+    		AND a.hot = #{hot}
+    	</if>
+		<if test="flag != null and flag != ''">
+    		AND a.flag = #{flag}
+    	</if>
+		<if test="remarks != null and remarks != ''">
+    		AND a.remarks = #{remarks}
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_activity(
+		            	id,
+        	imgs,
+        	title,
+        	disc,
+        	abstracts,
+        	activity_date,
+        	content,
+        	hot,
+        	flag,
+        	remarks,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{imgs},
+        	#{title},
+        	#{disc},
+        	#{abstracts},
+        	#{activityDate},
+        	#{content},
+        	#{hot},
+        	#{flag},
+        	#{remarks},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_activity SET 	
+		    			imgs = #{imgs},
+			title = #{title},
+			disc = #{disc},
+			abstracts = #{abstracts},
+			activity_date = #{activityDate},
+			content = #{content},
+			hot = #{hot},
+			flag = #{flag},
+			remarks = #{remarks},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_activity
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view show-tabs>
+			<ion-content>
+				<!--swiper-->
+				<div class="swiper-container contractDetailSwiper">
+				  	<div class="swiper-wrapper">
+					    <div class="swiper-slide" ng-repeat="item in imgs">
+					    	<img src="{{item}}" />
+					    </div>
+				  	</div>
+    				<div class="swiper-pagination"></div>
+				</div>
+				<!--swiper end-->
+				<!--热门活动-->
+				<div class="hotActivity">
+					<p class="title_icon">
+						<img src="images/rmhd.png" />
+					</p>
+					<div class="hotActivityList">
+						<!--item-->
+						<div class="hotActivityListItem" ng-repeat="item in hotList">
+							<a href="#activityDetail?id={{item.id}}">
+								<div class="hotActivityListItemMain">
+									<span class="img">
+										<img src="{{item.imgs}}" />
+									</span>
+									<dl>
+										<dt>{{item.title}}</dt>
+										<dd>{{item.disc}}</dd>
+									</dl>
+								</div>
+								<div class="hotActivityListItemFoot">
+									<span>活动时间:{{item.activityDate}} </span>
+								</div>
+							</a>
+						</div>
+						<!--item end-->
+					</div>
+				</div>
+				<!--热门活动 end-->
+				<!--全部活动-->
+				<div class="hotActivity allActivity">
+					<p class="title_icon">
+						<img src="images/qbhd.png" />
+					</p>
+					<div class="hotActivityList">
+						<!--item-->
+						<div class="hotActivityListItem" ng-repeat="item in signData">
+							<a href="#activityDetail?id={{item.id}}">
+								<div class="hotActivityListItemMain">
+									<span class="img">
+										<img src="{{item.imgs}}" />
+									</span>
+									<dl>
+										<dt>{{item.title}}</dt>
+										<dd>{{item.disc}}</dd>
+									</dl>
+								</div>
+								<div class="hotActivityListItemFoot">
+									<span>活动时间:{{item.activityDate}} </span>
+								</div>
+							</a>
+						</div>
+						<!--item end-->
+					</div>
+				</div>
+				<!--全部活动 end-->
+				<ion-infinite-scroll on-infinite="loadMore()" ng-if="moreDataCanBeLoaded"></ion-infinite-scroll>
+				<div style="height: 58px;"></div>
+			</ion-content>
+		</ion-view>	
+	</body>
+</html>

@@ -1,0 +1,349 @@
+/*header*/
+#header{ width: 100%; height: 1070px; overflow: hidden; position: relative; z-index: 10; background: #000;}
+#headerTop{width: 100%;  height: 80px; overflow: ; position: absolute; top: 0px; left: 0px; z-index: 400;}
+#detailsheaderTop{width: 100%;  height: 80px; overflow: ; background: #000;}
+.headerTopMain{padding: 0px 60px; height: 80px; overflow: ;}
+#detailsheaderTop .headerTopMain{ padding: 0px; width: 1200px; margin: 0px auto;}
+#logo{ display: block; float: left; height: auto; overflow: hidden; margin-top: 10px;}
+#logo a,#logo img{ display: block; height: 60px;}
+#nav{ height: auto; overflow: hidden; float: right;}
+#nav li{ float: left; margin-left: 10px; height: auto; overflow: hidden; margin-top: 18px;}
+#nav li a{ color: #fff; font-size: 16px; height: 40px; line-height: 40px; overflow: hidden; display: block; padding: 0px 15px;}
+#nav li.cur a,#nav li a:hover{ border-bottom: 3px solid #33b9ad; height: 37px;}
+#banner{ width: 100%; height: 100%; position: relative; z-index: 200;}
+#banner h1{ width: 100%; height: 60px; line-height: 60px; position: absolute; top: 50%; margin-top: -80px; letter-spacing: 5px; left: 0px; text-align: center; font-size: 56px; color: #fff;}
+#banner p{ width: 100%; height: 50px; line-height: 50px; position: absolute; top: 50%; margin-top: -10px; letter-spacing: 14px; left: 0px; text-align: center; font-size: 20px; color: #fff;}
+.FreeAdvice{ width: 180px; height: 180px; display: block; overflow: hidden; position: absolute; z-index: 300; left: 50%; margin-left: -90px; bottom:30px;}
+.FreeAdvice em{ display: block; width: 36px; height: 36px; position: absolute; z-index: 400; left: 50%; margin-left: -24px; bottom: 50%; margin-bottom: -24px; background: #60b8a9; border: 6px solid #42766f; border-radius: 50%; -webkit-border-radius: 50%; -ms-border-radius: 50%; -moz-border-radius: 50%;}
+.FreeAdvice:after{ content: ""; width: 58px; height: 58px; display: block; position: absolute; z-index: 400; left: 50%; margin-left: -29px; bottom: 50%; margin-bottom: -29px; border: 1px solid #37625c;border-radius: 50%; -webkit-border-radius: 50%; -ms-border-radius: 50%; -moz-border-radius: 50%; animation: FreeAdvice 1s linear infinite; -webkit-animation: FreeAdvice 1s linear infinite; -moz-animation: FreeAdvice 1s linear infinite; -ms-animation: FreeAdvice 1s linear infinite;}
+
+.language{ float: right; position: relative; z-index: 10;}
+.language a.current{ height: 20px; line-height: 20px; color: #fff; padding: 0px 15px; font-size: 16px; margin: 28px 0px 0px 20px; display: block;}
+.language ul{ display: none; width: 100px; height: auto; overflow: hidden; background: #fff; position: absolute; z-index: 20; top: 100%; margin-top: 10px; left: 50%; margin-left: -50px;}
+.language li{ height: 30px; line-height: 30px; border-bottom: 1px dashed #ccc; text-align: center;}
+.language li:last-child{ border-bottom: 0;}
+
+@-webkit-keyframes FreeAdvice{
+	from{width: 46px; height: 46px; margin-left: -23px; margin-bottom: -23px; opacity: 1;}
+	to{width: 180px; height: 180px; margin-left: -90px; margin-bottom: -90px; opacity: 0;}
+}
+@-moz-keyframes FreeAdvice{
+	from{width: 46px; height: 46px; margin-left: -23px; margin-bottom: -23px; opacity: 1;}
+	to{width: 180px; height: 180px; margin-left: -90px; margin-bottom: -90px; opacity: 0;}
+}
+@-ms-keyframes FreeAdvice{
+	from{width: 46px; height: 46px; margin-left: -23px; margin-bottom: -23px; opacity: 1;}
+	to{width: 180px; height: 180px; margin-left: -90px; margin-bottom: -90px; opacity: 0;}
+}
+@keyframes FreeAdvice{
+	from{width: 46px; height: 46px; margin-left: -23px; margin-bottom: -23px; opacity: 1;}
+	to{width: 180px; height: 180px; margin-left: -90px; margin-bottom: -90px; opacity: 0;}
+}
+.FreeAdvice:before{ content: ""; width: 50px; height: 50px; display: block; position: absolute; z-index: 400; left: 50%; margin-left: -30px; bottom: 50%; margin-bottom: -30px; border: 4px solid #37625c;border-radius: 50%; -webkit-border-radius: 50%; -ms-border-radius: 50%; -moz-border-radius: 50%; animation: FreeAdviceb 1s linear infinite; -webkit-animation: FreeAdviceb 1s linear infinite; -moz-animation: FreeAdviceb 1s linear infinite; -ms-animation: FreeAdviceb 1s linear infinite;background:-moz-radial-gradient(rgba(55,98,92,0) 20%,rgba(55,98,92,.8) 70%);background:-webkit-radial-gradient(rgba(55,98,92,0) 20%,rgba(55,98,92,.8) 70%);background:-o-radial-gradient(rgba(55,98,92,0) 20%,rgba(55,98,92,.8) 70%);background:-ms-radial-gradient(rgba(55,98,92,0) 20%,rgba(55,98,92,.8) 70%);}
+@-webkit-keyframes FreeAdviceb{
+	from{width: 40px; height: 40px; margin-left: -25px; margin-bottom: -25px; opacity: 1;}
+	to{width: 120px; height: 120px; margin-left: -60px; margin-bottom: -60px; opacity: 0;}
+}
+@-moz-keyframes FreeAdviceb{
+	from{width: 40px; height: 40px; margin-left: -25px; margin-bottom: -25px; opacity: 1;}
+	to{width: 120px; height: 120px; margin-left: -60px; margin-bottom: -60px; opacity: 0;}
+}
+@-ms-keyframes FreeAdviceb{
+	from{width: 40px; height: 40px; margin-left: -25px; margin-bottom: -25px; opacity: 1;}
+	to{width: 120px; height: 120px; margin-left: -60px; margin-bottom: -60px; opacity: 0;}
+}
+@keyframes FreeAdviceb{
+	from{width: 40px; height: 40px; margin-left: -25px; margin-bottom: -25px; opacity: 1;}
+	to{width: 120px; height: 120px; margin-left: -60px; margin-bottom: -60px; opacity: 0;}
+}
+.FreeAdvice a{ position: absolute; z-index: 500; width: 100px; height: 50px; line-height: 50px; top: 50%; margin-top: -25px; left: 50%; margin-left: -48px; font-size: 18px; color: #fff; letter-spacing: 2px; text-align: center; display: block;}
+.technologyL{ position: absolute; z-index: 30; top: 0px; left: 0px; width: 50%; height: 100%; background: url(../imgaes/technology_line_01.png) right center no-repeat;  animation: technology1 .8s linear forwards; -webkit-animation: technology1 .8s linear forwards; -ms-animation: technology1 .8s linear forwards; -moz-animation: technology1 .8s linear forwards;}
+.technologyL:after{ content: ""; width: 100%; height: 100%; display: block; background: #000; float: right;animation: technology .8s linear forwards; -webkit-animation: technology .8s linear forwards; -ms-animation: technology .8s linear forwards; -moz-animation: technology .8s linear forwards; }
+@-webkit-keyframes technology{
+	from{width:100%; }
+	to{width:0%; }
+}@-moz-keyframes technology{
+	from{width:100%; }
+	to{width:0%; }
+}@-ms-keyframes technology{
+	from{width:100%; }
+	to{width:0%; }
+}@keyframes technology{
+	from{width:100%; }
+	to{width:0%; }
+}
+@-webkit-keyframes technology1{
+	from{opacity: 0.2;}
+	to{ opacity: 1;}
+}@-moz-keyframes technology1{
+	from{opacity: 0.2;}
+	to{ opacity: 1;}
+}@-ms-keyframes technology1{
+	from{opacity: 0.2;}
+	to{ opacity: 1;}
+}@keyframes technology1{
+	from{opacity: 0.2;}
+	to{ opacity: 1;}
+}
+.technologyR{animation: technologyr .8s linear .8s forwards; -webkit-animation: technologyr .8s linear .8s forwards; -ms-animation: technologyr .8s linear .8s forwards; -moz-animation: technologyr .8s linear .8s forwards;  position: absolute; z-index: 300; top: 0px; left: 50%; width: 0%; height: 100%; background: url(../imgaes/technology_line_02.png) left center no-repeat;}
+@-webkit-keyframes technologyr{
+	from{width:0%; }
+	to{width:50%; }
+}@-moz-keyframes technologyr{
+	from{width:0%; }
+	to{width:50%; }
+}@-ms-keyframes technologyr{
+	from{width:0%; }
+	to{width:50%; }
+}@keyframes technologyr{
+	from{width:0%; }
+	to{width:50%; }
+}
+
+.bannerTitle{ position: absolute; top: 50%; margin-top: -5.4%; z-index: 10; left: 50%; width: 44%; margin-left: -22%;}
+.bannerTitle img{ width: 100%; height: auto; overflow: hidden; display: block;}
+.yuan{ width: 24%; height: auto; display: block; overflow: hidden; position: absolute; z-index: 20;  left: 50%; margin-left: -12%; top: 50%; margin-top: -14%; opacity: 0; animation: yuan 40s linear 1.6s infinite; -webkit-animation: yuan 40s linear 1.6s infinite; -ms-animation: yuan 40s linear 1.6s infinite; -moz-animation: yuan 40s linear 1.6s infinite;}
+.yuan img{ width: 100%; height: auto; display: block;  overflow: hidden;}
+@-webkit-keyframes yuan{
+	0%{opacity: 0;}
+	10%{opacity: 1;transform: rotate(108deg);}
+	100%{ transform: rotate(1080deg);opacity: 1;}
+}@-moz-keyframes yuan{
+	0%{opacity: 0;}
+	10%{opacity: 1;transform: rotate(108deg);}
+	100%{ transform: rotate(1080deg);opacity: 1;}
+}@-ms-keyframes yuan{
+	0%{opacity: 0;}
+	10%{opacity: 1;transform: rotate(108deg);}
+	100%{ transform: rotate(1080deg);opacity: 1;}
+}@keyframes yuan{
+	0%{opacity: 0;}
+	10%{opacity: 1;transform: rotate(108deg);}
+	100%{ transform: rotate(1080deg);opacity: 1;}
+}
+.embellish{ width: 15%; height: auto; position: absolute; z-index: 20; right: 0px; bottom: 0px;opacity: 0; animation: embellish .1s linear 1.6s infinite; -webkit-animation: embellish .1s linear 1.6s infinite; -ms-animation: embellish .1s linear 1.6s infinite; -moz-animation: embellish .1s linear 1.6s infinite;}
+.embellish img{ width: 100%; height: auto; display: block;}
+@-webkit-keyframes embellish{
+	from{opacity: 1;}
+	to{ opacity: 1;}
+}@-moz-keyframes embellish{
+	from{opacity: 1;}
+	to{ opacity: 1;}
+}@-ms-keyframes embellish{
+	from{opacity: 1;}
+	to{ opacity: 1;}
+}@keyframes embellish{
+	from{opacity: 1;}
+	to{ opacity: 1;}
+}
+#content{ width: 100%; height: auto; overflow: hidden;}
+.item{ width: 100%; height: auto; overflow: hidden;}
+#service{width: 100%; height: auto; overflow: hidden; background: #f4f4f4;}
+.itemHeader{ width: 100%; height: auto; overflow: hidden; text-align: center;}
+.itemHeader dt{ font-size: 30px; color: #666666; width: 100%; height: auto; overflow: hidden; margin-top: 90px; font-family: "PINGFANGBOLD";}
+.itemHeader dd{ width: 100%; height: auto; overflow: hidden; margin-top: 24px; font-size: 16px; line-height: 28px; color: #333333;}
+.itemHeader dd p{ width: 70%; height: auto; overflow: hidden; text-align: justify; text-indent: 2em; margin: 0px auto;}
+.itemHeader dd p.whitePaper{ width: 100%; height: auto; overflow: hidden; text-align: center; text-indent: 0; margin-top: 40px;}
+.whitePaper a{ width: 250px; height: auto; overflow: hidden; display: inline-block; margin: 0px 30px;}
+.whitePaper span.img{ width: 64px; height: 64px; display: block; overflow: hidden; margin: 0px auto;}
+.whitePaper span.img img{ width: 100%; height: 100%; display: block;}
+.whitePaper em{ width: 100%; height: 24px; line-height: 24px; text-align: center; display: block; font-size: 14px; text-indent: 0;}
+.itemContent{ width: 100%; height: auto; overflow: hidden; padding: 60px 0px;}
+#service .itemContent ul{ width: 100%; height: auto; overflow: hidden; text-align: center; padding: 10px;}
+#service .itemContent li{ display: inline-block; width: 260px; height: 300px; position: relative; z-index: 10; background: #fff; background: #fff; vertical-align: middle; margin:10px 30px; overflow: hidden; box-shadow: 0px 0px 12px 3px rgba(0,0,0,.1);}
+#service .itemContent li span.img{transition:1s;-ms-transition:1s;-moz-transition:1s;-webkit-transition:1s;  position: absolute; top: 28px; left: 50%; margin-left: -32px; z-index: 20; width: 64px; height: 64px; display: block; overflow: hidden; border: 1px solid #1ebd9e; text-align: center; line-height: 64px; vertical-align: middle; border-radius: 50%; -webkit-border-radius: 50%; -moz-border-radius: 50%; -ms-border-radius: 50%;}
+#service .itemContent li span.img img{ display: block; margin: 10px auto;}
+#service .itemContent li dl{ width: 100%; height: auto; overflow: hidden; margin-top: 110px; text-align: center;}
+#service .itemContent li dt{ width: 100%; height:auto; overflow: hidden; font-size: 20px; font-family: "PINGFANGMEDIUM";}
+#service .itemContent li dd{ width: 100%; height: auto; overflow: hidden; margin-top: 6px;}
+#service .itemContent li dd em{ font-size: 14px; color: #1abc9c;}
+#service .itemContent li dd p{ font-size: 14px;color: #525252; height: auto; overflow: hidden; line-height: 20px;}
+#service .itemContent li.service1 .img{ background: url(../imgaes/icon_data.png) center center no-repeat;}
+#service .itemContent li.service1:hover .img{ background: url(../imgaes/icon_data_white.png) center center no-repeat #1abc9c;transform: rotateY(180deg);-ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);-webkit-transform: rotateY(180deg);}
+#service .itemContent li.service2 .img{ background: url(../imgaes/icon_implement.png) center center no-repeat;}
+#service .itemContent li.service2:hover .img{ background: url(../imgaes/icon_implement_white.png) center center no-repeat #1abc9c;transform: rotateY(180deg);-ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);-webkit-transform: rotateY(180deg);}
+#service .itemContent li.service3 .img{ background: url(../imgaes/icon_service.png) center center no-repeat;}
+#service .itemContent li.service3:hover .img{ background: url(../imgaes/icon_service_white.png) center center no-repeat #1abc9c;transform: rotateY(180deg);-ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);-webkit-transform: rotateY(180deg);}
+#service .itemContent li.service4 .img{ background: url(../imgaes/icon_hatch.png) center center no-repeat;}
+#service .itemContent li.service4:hover .img{ background: url(../imgaes/icon_hatch_white.png) center center no-repeat #1abc9c;transform: rotateY(180deg);-ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);-webkit-transform: rotateY(180deg);}
+
+#case{ width: 100%; height: auto; overflow: hidden; background: #fff;}
+#case .swiper-case{ width: 100%; height: auto; overflow: hidden; padding-bottom: 80px;}
+#case .swiper-case .swiper-slide{width: 100%; height: auto; overflow: hidden;}
+#case .swiper-slide ul{ padding: 0;}
+#case .swiper-slide li{ width: 25%; height:16vw; overflow: hidden; margin: 0px; display: block; float: left; position: relative; z-index: 10;}
+#case .swiper-slide li a,#case .swiper-slide li img{transition:1s;-ms-transition:1s;-moz-transition:1s;-webkit-transition:1s;  width: 100%; height: 100%; overflow: hidden; display: block;}
+#case .swiper-slide li p{ width: 100%; height: 80px; line-height: 80px; text-align: center; background: rgba(0,0,0,.5); position: absolute; z-index: 20; bottom: -100%; left: 0px; font-size: 26px; color: #fff;}
+#case .swiper-slide li a:hover img{ transform: scale(1.2); -ms-transform: scale(1.2); -moz-transform: scale(1.2); -webkit-transform: scale(1.2);}
+#case .swiper-slide li a:hover p{ bottom: 0px;}
+#case .itemContent{ position: relative; z-index: 10; padding: 80px 0px;}
+#case .swiper-button-prev{top: 44px; width: 40px; height: 40px; left: 50%; margin-left: -40px; background: url(../imgaes/next1.png) no-repeat; background-size: 100% 100%;}
+#case .swiper-button-next{top: 44px; width: 40px; height: 40px; left: 50%; margin-left: 0px; background: url(../imgaes/prev1.png) no-repeat; background-size: 100% 100%;}
+
+.swiper-pagination-bullet{ border: 1px solid #333; background: #fff; opacity: 1;}
+.swiper-pagination-bullet-active{ background: #333333;}
+
+#about{ background: #f2f2f2;}
+#about .aboutMain{ margin-bottom: -60px; width: 100%; height: 306px; background: #181818; position: relative; z-index: 10;}
+#about .aboutMainOn:after{ content: ""; width: 100%; height: 100%;background: url(../imgaes/up_light_one.png) no-repeat; display: block; position: absolute; z-index: 20; top: 100%; left: 0px; animation: aboutafterbg 1s linear forwards; -ms-animation: aboutafterbg 1s linear forwards; -moz-animation: aboutafterbg 1s linear forwards; -webkit-animation: aboutafterbg 1s linear forwards; }
+#about .aboutMainOn:before{ content: ""; width: 100%; height: 100%;background: url(../imgaes/up_light_two.png) no-repeat; display: block; position: absolute; z-index: 20; top: 100%; left: 0px; animation: aboutbefore 1s linear .4s forwards;  -ms-animation: aboutbefore 1s linear .4s forwards;  -moz-animation: aboutbefore 1s linear .4s forwards;  -webkit-animation: aboutbefore 1s linear .4s forwards; }
+#about .aboutMain ul{ text-align: center; height: 100%; overflow: hidden;vertical-align: middle; position: relative; z-index: 20;}
+#about .aboutMainOn ul:after{ content: ""; width: 100%; height: 100%;background: url(../imgaes/up_thread.png) no-repeat; display: block; position: absolute; z-index: 20; top: 0; opacity: 0; left: 0px; animation: aboutulafterbg 1s linear 1.2s forwards; -ms-animation: aboutulafterbg 1s linear 1.2s forwards; -moz-animation: aboutulafterbg 1s linear 1.2s forwards; -webkit-animation: aboutulafterbg 1s linear 1.2s forwards; }
+@-webkit-keyframes aboutafterbg{
+	from{top: 100%;}
+	to{ top: 0px;}
+}@-moz-keyframes aboutafterbg{
+	from{top: 100%;}
+	to{ top: 0px;}
+}@-ms-keyframes aboutafterbg{
+	from{top: 100%;}
+	to{ top: 0px;}
+}@keyframes aboutafterbg{
+	from{top: 100%;}
+	to{ top: 0px;}
+}
+@-webkit-keyframes aboutbefore{
+	from{top: 100%;}
+	to{ top: 0px;}
+}@-moz-keyframes aboutbefore{
+	from{top: 100%;}
+	to{ top: 0px;}
+}@-ms-keyframes aboutbefore{
+	from{top: 100%;}
+	to{ top: 0px;}
+}@keyframes aboutbefore{
+	from{top: 100%;}
+	to{ top: 0px;}
+}@-webkit-keyframes aboutulafterbg{
+	from{opacity: 0;}
+	to{ opacity: 1;}
+}@-moz-keyframes aboutulafterbg{
+	from{opacity: 0;}
+	to{ opacity: 1;}
+}@-ms-keyframes aboutulafterbg{
+	from{opacity: 0;}
+	to{ opacity: 1;}
+}@keyframes aboutulafterbg{
+	from{opacity: 0;}
+	to{ opacity: 1;}
+}
+#about .aboutMain li{ display: inline-block; height: 180px; overflow: hidden; margin: 60px 8% 0px; vertical-align: middle;}
+#about .aboutMain li span{ font-size: 56px; color: #21efdd;}
+#about .aboutMain li em{ font-size: 18px; color: #fff;}
+a.ApplicationDownload{ width: 100px; height: 46px; line-height: 46px; text-align: center; border: 1px solid #1abc9c; color: #1abc9c; border-radius: 8px; display: block; z-index: 200; position: absolute; bottom: 10%; left: 50%; margin-left: -50px;}
+a.ApplicationDownload:hover{ background: #1abc9c; color: #fff;}
+#partner .partnerMain{ width: 1200px; height: auto; overflow: hidden; margin: 0px auto;}
+#partner .swiper-partner{ width: 100%; height: auto; overflow: hidden; padding-bottom: 80px;}
+#partner .swiper-slide{ background: #fff;}
+#partner .swiper-slide li{ width: 198px; height: 152px; overflow: hidden; float: left; border-width: 1px; border-style: solid; border-color:#f2f2f2; position: relative; z-index: 10;}
+#partner .swiper-slide li span{ transition: .4s; -ms-transition: .4s; -moz-transition: .4s; -webkit-transition: .4s; width: 100%; height: 100%; line-height: 152px; overflow: hidden; display: block; text-align: center; vertical-align: middle; position: absolute; z-index: 30; top: 0px; left: 0px; background: #fff;}
+#partner .swiper-slide li span.b{ z-index: 20; top:100%}
+#partner .swiper-slide li span img{   display: inline-block; vertical-align: middle;}
+#partner .swiper-slide li:hover span.t{ top: -100%;}
+#partner .swiper-slide li:hover span.b{ top: 0;}
+
+#news{ background: #fff;}
+#news .partnerMain{ width: 1200px; height: auto; overflow: hidden; margin: 0px auto;}
+#news .swiper-partner{ width: 100%; height: auto; overflow: hidden; padding-bottom: 80px;}
+#news .swiper-slide{ background: #fff;}
+#news .swiper-slide li{ width: 198px; height: 152px; overflow: hidden; float: left; border-width: 1px; border-style: solid; border-color:#f2f2f2; position: relative; z-index: 10;}
+#news .swiper-slide li span{ transition: .4s; -ms-transition: .4s; -moz-transition: .4s; -webkit-transition: .4s; width: 100%; height: 100%; line-height: 152px; overflow: hidden; display: block; text-align: center; vertical-align: middle; position: absolute; z-index: 30; top: 0px; left: 0px; background: #fff;}
+#news .swiper-slide li span.b{ z-index: 20; top:100%}
+#news .swiper-slide li span img{   display: inline-block; vertical-align: middle;}
+#news .swiper-slide li:hover span.t{ top: -100%;}
+#news .swiper-slide li:hover span.b{ top: 0;}
+
+#map{ width: 100%; height: auto; overflow: hidden;}
+#map img{width: 100%; height: auto; overflow: hidden; display: block;}
+
+#footer{ width: 100%; height: auto; overflow: hidden; background: #323232 url(../imgaes/footer_bg.png) center top no-repeat;}
+.footerMain{ width: 1204px; height: 390px; overflow: hidden; margin: 0px auto;}
+.contactMain{ width: 448px; height: auto; overflow: hidden; float: left;}
+.contactMain .title{ width: 100%; height:auto; overflow: hidden; font-size: 22px; color: #fff; margin-top: 44px; font-weight: 100;}
+.contactMain dl{ padding-left: 26px; height: auto; overflow: hidden; margin-top: 8px;}
+.contactMain dl.address{ background: url(../imgaes/icon_address.png) left 8px no-repeat;}
+.contactMain dl.email{ background: url(../imgaes/icon_email.png) left 10px no-repeat;}
+.contactMain dl.phone{ background: url(../imgaes/icon_phone.png) left 8px no-repeat;}
+.contactMain dt{ width: 100%; height: 34px; line-height: 34px; overflow: hidden; border-bottom: 1px solid #339e94; font-size: 14px; color: #aaa;}
+.contactMain dd{ width: 100%; height: 30px; line-height: 30px; overflow: hidden;  font-size: 14px; color: #aaa;}
+.contactMain ul{ width: 100%; height: auto; overflow: hidden; margin-top: 15px;}
+.contactMain li{ float: left; margin-right: 15px;}
+.footer_form{ width: 708px; height: auto; overflow: hidden; margin-top: 34px;}
+.footer_form p{ width: 100%; height: auto; overflow: hidden; margin-bottom: 10px; color: #fff;}
+.footer_form li{ width: 100%; height: auto; overflow: hidden; margin-bottom: 10px;}
+.footer_form li ._txt{ border: 1px solid #959595; height: 44px; line-height: 44px; background: none; width: 300px; padding: 0px 20px; color: #fff;}
+.footer_form li .phone_txt{ margin-left: 18px;}
+.footer_form li ._txt1{ border: 1px solid #959595; height: 44px; line-height: 44px; background: none; width: 666px; padding: 0px 20px; color: #fff;}
+.footer_form li .textarea{ border: 1px solid #959595; height:80px;background: none; width: 670px; padding: 10px 18px; color: #fff; outline: none;}
+.footer_form li .submit_btn{ width: 140px; height: 38px; line-height: 38px; text-align: center; font-size: 16px; color: #fff; background: #339e94; display: block;}
+.footer_bottom{ width: 100%; height: 74px; overflow: hidden; background: #1f2020; position: relative; z-index: 10;}
+.footer_bottom p{ width: 1204px; height: 74px; line-height: 74px; text-align: left; font-size: 14px; color: #929292; margin: 0px auto;}
+#goTop{ width: 42px; height: 42px; border: 1px solid #cccccc; background: url(../imgaes/arrow-top.png) center center no-repeat; display: block; position: absolute; top: 15px; right: 200px; border-radius: 2px; -ms-border-radius: 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px;}
+
+.wechatMask{ width: 100%; height: 100%; display: none; position: fixed; top: 0px; left: 0px; z-index: 500; background: rgba(0,0,0,.5);}
+.wechatMaskMain{ width: 486px; height: 260px; overflow: hidden; background: #fff; position: absolute; z-index: 510; top: 50%; left: 50%; margin-top: -130px; margin-left: -243px;}
+.wechatMaskMain dl{ width: 237px; height: 260px; border-right: 1px solid #cccccc; float: left; text-align: center;}
+.wechatMaskMain dt{ width: 100%; height: auto; overflow: hidden; margin-top: 50px; margin-bottom: 8px;}
+.wechatMaskMain dt img{ display: inline-block;}
+.wechatMaskMain dd{width: 100%; height: auto; overflow: hidden; margin-top:6px; font-size: 13px; color: #666;}
+.wechatMaskMain dd span{ font-size: 18px; color: #323232;}
+.wechatMaskMain .codeImg{ width: 248px; height: 260px; display: block; float: right; text-align: center; line-height: 260px;}
+.wechatMaskMain .codeImg img{ display: inline-block; vertical-align: middle;}
+
+#detailsContent{ width: 1200px; height: auto; overflow: hidden; margin: 20px auto 40px;}
+.detailsNewsMain{ width: 790px; padding: 15px 28px; height: auto; overflow: hidden; background: #fff; float: left;}
+.detailsNewsMain .newsLabel{ width: 100%; height: auto; overflow: hidden; font-size: 14px; color: #999;}
+.newsHeader{ width: 100%; height: auto; overflow: hidden; margin-top:15px;}
+.newsHeader dt{ width: 100%; height: auto; overflow: hidden; font-size: 24px;}
+.newsHeader dd{ width: 100%; height: auto; overflow: hidden; margin-top: 10px; border-bottom: 1px solid #ccc; line-height: 30px;}
+.newsHeader dd span{ margin-right: 75px; font-size: 14px; color: #999;}
+.newsContent{ padding:15px 0px 20px; height: auto; overflow: hidden;}
+.newsContent p{ width: 100%; height: auto; overflow: hidden; margin-top: 8px;}
+.newsContent p img{ display: block; max-width: 100%; height: auto; overflow: hidden;}
+.newsFooter{ padding: 30px 0px 40px; height: auto; overflow: hidden;}
+.newsFooter li{ width: 100%; height: 34px; line-height: 34px; font-size: 14px;}
+.newsFooter li a:hover{ color: #1abc9c; text-decoration: underline;}
+
+.moreNews{ width: 342px; height: auto; overflow: hidden; float: right;}
+.moreNews .title{ width: 100%; height: 40px; line-height: 40px; overflow: hidden; border-bottom: 2px solid #000; font-size: 16px;}
+.moreNewsList{ width: 100%; height: auto; overflow: hidden; margin-top: 10px;}
+.moreNewsList li{ width: 100%; height: auto; overflow: hidden; margin-bottom: 15px;}
+.moreNewsList li a{ padding: 8px; height: auto; overflow: hidden; background: #fff; display: block;}
+.moreNewsList li img{ width: 100%; height: auto; overflow: hidden; display: block;}
+.moreNewsList li p{ width: 100%; height: auto; overflow: hidden;padding:8px 0px 2px; font-size: 15px;}
+
+.case_banner{ width: 100%; height: auto; overflow: hidden;}
+.case_banner img{ width: 100%; height: auto; overflow: hidden; display: block;}
+.caseMainOuter{ width: 100%; height: auto; overflow: hidden; background: #F2F2F2; padding: 32px 0px;}
+.caseMain{ width: 1100px; height: auto; overflow: hidden; margin: 0px auto; display: box; display: -webkit-box; display: -moz-box; display: -ms-box;}
+.caseMain dl{ height: 60px; overflow: hidden; display: block; padding-right: 30px;  border-right: 1px solid #999999;}
+.caseMain dt{ width: 60px; height: 60px; margin-right: 15px; float: left; display: block; overflow: hidden;border-radius: 6px; -webkit-border-radius: 6px; -ms-border-radius: 6px; -moz-border-radius: 6px;}
+.caseMain dd{ line-height: 60px; font-size: 16px; float: left;}
+.caseMain p{ width: 100%; height: auto; overflow: hidden; box-flex:1; padding: 0px 25px; line-height: 20px; font-size: 14px; color: #666; -ms-box-flex:1; -webkit-box-flex:1; -moz-box-flex:1;}
+.caseDetailsOuter{ width: 100%; height: auto; overflow: hidden; background: #fff; padding: 30px 0px;}
+.caseDetails{ width: 1100px; height: auto; overflow: hidden; margin: 0px auto;}
+.caseDetails p,.caseDetails img{ width: 100%; height: auto; overflow: hidden; display: block;}
+.casePage{ width: 100%; height: auto; overflow: hidden;}
+.casePage a{ width: 80px; height: 80px; display: block; text-align: center; line-height: 80px; overflow: hidden; border: 1px solid #d1d1d1; font-size: 18px; margin: 30px auto; border-radius: 50%; -ms-border-radius: 50%; -webkit-border-radius: 50%; -moz-border-radius: 50%;}
+.casePage a:hover{ color: #fff; border: 1px solid #1ABC9C; background: #1ABC9C;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

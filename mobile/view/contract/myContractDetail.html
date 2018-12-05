@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view hide-tabs class="contractDetailOuter myContractDetailOuter">
+			<ion-content>
+				<!--swiper-->
+				<div class="swiper-container myContractDetailSwiper">
+				  	<div class="swiper-wrapper">
+					    <div class="swiper-slide" ng-repeat="item in imgs">
+					    	<img src="{{item}}" />
+					    </div>
+				  	</div>
+    				<div class="swiper-pagination"></div>
+				</div>
+				<!--swiper end-->
+				<!--header-->
+				<div class="contractDetailHeader myContractDetailHeader" ng-if="data.contractTime == null || data.contractTime == ''">
+					<span class="title">{{data.signTypeName}}</span>
+					<a href="#signAgreement?id={{id}}" class="viewAgreement">查看协议</a>
+					<ul>
+						<li>活动期限：{{data.contractTime}}-{{data.endTime}}</li>
+						<li>终端：{{data.shopName}}</li>
+						<li>业务员：{{data.adminName}}</li>
+					</ul>
+				</div>
+				<div class="contractDetailHeader myContractDetailHeader" ng-if="data.contractTime != null && data.contractTime != ''">
+					<span class="title">{{data.signTypeName}}</span>
+					<a href="#signAgreement?id={{id}}" class="viewAgreement">查看协议</a>
+					<ul>
+						<li>活动期限：{{data.contractTime}}-{{data.endTime}}</li>
+						<li>终端：{{data.endId}}</li>
+						<li>业务员：{{data.adminName}}</li>
+					</ul>
+					<div class="myContractDetailHeaderTable">
+						<table>
+							<tr>
+								<th>陈列付费</th>
+								<th>品项</th>
+								<th>备注</th>
+							</tr>
+							<tr ng-repeat="item in data.putTypeJson">
+								<td>{{item.name}}</td>
+								<td>{{item.listProduct[0].name}}</td>
+								<td>{{item.remark}}</td>
+							</tr>
+						</table>
+					</div>
+					<dl>
+						<dt>
+							<span class="label">备注：</span>
+							<p>{{data.remark}}</p>
+						</dt>
+						<dd>
+							<span class="label">说明：</span>
+							<p>{{data.explains}}</p>
+						</dd>
+						<dd ng-if="data.status == 7">
+							<span class="label">拒绝原因：</span>
+							<p>{{data.reason}}</p>
+						</dd>
+					</dl>
+					<a href="javascript:void(0)" class="photograph_btn" ng-if="data.status == 6 || data.status == 8 || data.status == 9" ng-click="photoUpload()">拍照上传</a>
+					<div class="myContractSet" ng-if="data.status == 4">
+						<a href="javascript:void(0)" ng-click="refuseMask()">拒绝</a>
+						<a href="#contractAgreement?id={{id}}" class="accept_btn">接受</a>
+					</div>
+				</div>
+				<!--header end-->
+				<!--desc-->
+				<div class="myContractDetailLsit" ng-if="data.status == 6 || data.status == 8 || data.status == 9">
+					<!--header-->
+					<div class="myContractDetailLsitHeader">
+						<img src="images/qydt.png" />
+					</div>
+					<!--header end-->
+					<!--list-->
+					<div class="myContractDetailListMain" ng-if="patrolData.length > 0">
+						<!--item-->
+						<div class="myContractDetailListItem" ng-repeat="item in patrolData">
+							<div class="myContractDetailItemHeader">
+								<span class="shopImg">
+									<img src="{{item.shopImg.split(',')[0]}}" />
+								</span>
+								<dl>
+									<dt>{{item.shopName}}<span>{{item.types == 1?'商家 ':'巡查员'}}</span></dt>
+									<dd>{{item.createDate}}上传照片</dd>
+								</dl>
+							</div>
+							<div class="myContractDetailItemCont">
+								<ion-scroll direction="x" class="scroll">
+									<ul ng-if="item.img.indexOf(',') == -1">
+										<li>
+											<img src="{{item.img}}" />
+										</li>
+									</ul>
+									<ul ng-if="item.img.indexOf(',') != -1">
+										<li ng-repeat="items in item.img.split(',')">
+											<img src="{{items}}" />
+										</li>
+									</ul>
+								</ion-scroll>
+							</div>
+						</div>
+						<!--item end-->
+					</div>
+					<div class="myContractDetailListMain" ng-if="patrolData.length < 1">
+						<div class="nodata1">{{nodata}}</div>
+					</div>
+					<!--list end-->
+				</div>
+				<!--desc end-->
+				<ion-infinite-scroll on-infinite="loadMore()" ng-if="moreDataCanBeLoaded && (data.status == 6 || data.status == 8 || data.status == 9)"></ion-infinite-scroll>
+			</ion-content>
+		</ion-view>	
+		<!--mask-->
+		<div class="myContractDetailMask">
+			<div class="myContractDetailMaskOuter">
+				<div class="myContractDetailMaskMain">
+					<form id="myContractDetailForm">
+						<dl>
+							<dt>已拒绝</dt>
+							<dd>拒绝日期：{{date}}</dd>
+							<dd>
+								<p>
+									<textarea placeholder="请点击输入拒绝理由" ng-model="reason" name="reason" class="_textarea"></textarea>
+								</p>
+							</dd>
+						</dl>
+						<a href="javascript:void(0)" ng-click="refuseContract()">好的</a>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="contractUploadMask">
+			<div class="contractUploadMaskOuter">
+				<div class="contractUploadMaskHeader">
+					<span>拍照上传</span>
+					<a href="javascript:void(0)"  ng-click="closeContractUpload()"></a>
+				</div>
+				<div class="contractUploadMaskCont">
+					<dl>
+						<dt>
+							<div class="itemImgOuter">
+								<span class="itemImgs">
+									<em>x</em>
+									<img src="" />
+									<input type="file" name="shopImg" accept="image/*" capture="camera" />
+								</span>
+							</div>
+						</dt>
+						<dd>
+ 							<input type="button" value="确认上传" id="clear" ng-click="saveContractUpload()"/>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		<!-- mask end -->
+	</body>
+	<script>
+		function uploadImg(obj){
+			$(obj).siblings("a").text( $(obj).val() );
+		}
+		var imglen = 0;
+		$("input[name=shopImg]").live('change',function(){
+			var obj = $(this);
+			var files = event.target.files, file; 
+			if (files && files.length > 0) {
+				file = files[0]; 
+				console.log(file); 
+				var URL = window.URL || window.webkitURL; 
+				var imgURL = URL.createObjectURL(file); 
+				var txt = '<span class="itemImgs">'+
+								'<em>x</em>'+
+								'<img src="" />'+
+								'<input type="file" name="shopImg" accept="image/*" capture="camera" />'+
+							'</span>'
+				if(imglen < 4){
+					obj.parent(".itemImgs").find("img").css("display","block");
+					obj.parent(".itemImgs").find("em").css("display","block");
+					obj.parent(".itemImgs").find("img").attr("src",imgURL);
+					obj.parents(".itemImgOuter").append(txt);
+					imglen++;
+				}else{
+					obj.parent(".itemImgs").find("img").css("display","block");
+					obj.parent(".itemImgs").find("em").css("display","block");
+					obj.parent(".itemImgs").find("img").attr("src",imgURL);
+					imglen++;
+				}
+			} 
+		});
+		$(".itemImgs em").live("click",function(){
+			if(imglen == 5){
+				var txt = '<span class="itemImgs">'+
+						'<em>x</em>'+
+						'<img src="" />'+
+						'<input type="file" name="shopImg" accept="image/*" capture="camera" />'+
+					'</span>';
+					$(this).parents(".itemImgOuter").append(txt);
+			}
+			imglen--;
+			$(this).parent(".itemImgs").remove();
+			console.log(imglen)
+		});
+	</script>
+</html>

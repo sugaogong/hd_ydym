@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view hide-tabs>
+			<ion-content id="loginContent">
+				<!--logo-->
+				<div class="loginLogo">
+					<img src="images/logo.png" />
+				</div>
+				<!--logo end-->
+				<!--main-->
+				<div class="loginMain">
+					<!--header-->
+					<div class="loginHeader">
+						<span>登录</span>
+						<em>Sign in</em>
+					</div>
+					<!--header end-->
+					<!--form-->
+					<div class="loginForm">
+						<ul>
+							<li>
+								<span class="label">账号/手机号</span>
+								<p>
+									<input type="text" class="_txt" ng-model="$parent.phone" />
+								</p>
+							</li>
+							<li>
+								<span class="label">密码</span>
+								<p>
+									<input type="password" class="_txt" ng-model="$parent.password" />
+								</p>
+							</li>
+							<li>
+								<input type="button" value="确定" class="login_btn" ng-click="login()" />
+							</li>
+						</ul>
+					</div>
+					<!--form end-->
+				</div>
+				<!--main end-->
+				<!--footer-->
+				<div class="loginFooter">
+					<a href="#retrievepas">忘记密码</a>
+					<a href="#register">立即注册</a>
+				</div>
+				<!--footer end-->
+			</ion-content>
+		</ion-view>	
+	</body>
+</html>

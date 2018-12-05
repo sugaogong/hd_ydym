@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<meta charset="UTF-8">
+		<title>签约动态</title>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/layer.css" />
+		<link rel="stylesheet" href="css/swiper.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+		<script type="text/javascript" src="js/layer.js" ></script>
+		<script type="text/javascript" src="js/swiper.min.js" ></script>
+		<script type="text/javascript" src="js/script.js" ></script>
+	</head>
+	<body>
+		<div class="dynamicSignList">
+		</div>
+		<img alt="" style="display:none" id="displayimg" src="" />
+	</body>
+	<script>
+	function getQueryString(name) { 
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+		var r = window.location.search.substr(1).match(reg); 
+		if (r != null) return unescape(r[2]); return null; 
+		} 
+
+		var signId = getQueryString("signId"),
+			page = 0,
+			load = true;
+		loadList(signId,page,0);
+		$(window).scroll(function() {  
+   		 	if($(window).scrollTop()+$(window).height()+5>$(".dynamicSignList").height()){
+		   		if(load == true){
+		   			load = false;
+		   			page++;
+		   			loadList(signId,page,1)
+		   		}
+		    }
+	    });
+	    function loadList(signId,page,n){
+			$.ajax({
+				type:"post",
+				url:"../api/admin/sysGetPatrol",
+				data:{
+					signId:signId,
+					page:page,
+				},
+				success:function(data){
+					console.log(data);
+					if(data.resultCode == 0){
+						if(data.resultData.list.length > 0){
+							var txt = new Array();
+							for (var i in data.resultData.list) {
+								var item = data.resultData.list[i];
+								var type = "";
+								if(item.types == 1){
+									type = "终端";
+								}else if(item.types == 2){
+									type = "业务员";
+								}
+								txt += '<div class="dynamicSignItem">';
+								txt += '	<div class="dynamicSignItemHead">';
+								txt += '		<span class="userImg">';
+								if(item.shopImg !=null && item.shopImg !=" "){
+									txt += '			<img src="'+ item.shopImg.split(",")[0] +'" />';
+								}
+								txt += '		</span>';
+								txt += '		<dl>';
+								txt += '			<dt>'+ item.shopName +'<span>('+ type +')</span></dt>';
+								txt += '			<dd>'+ item.createDate +' 上传照片</dd>';
+								txt += '		</dl>';
+								txt += '	</div>';
+											if(item.img != null && item.img != ""){
+								txt += '	<div class="dynamicSignItemCont">';
+								txt += '		<ul>';
+													if(item.img.indexOf(",") == -1){
+								txt += '				<li onclick=window.open("'+ item.img +'")>';
+								txt += '					<img onclick=window.open("'+ item.img +'") src="'+ item.img +'" />';
+								txt += '				</li>';
+													}else{
+														for (var x = 0;x < item.img.split(",").length;x++) {
+								txt += '					<li onclick=window.open("'+ item.img.split(",")[x] +'")>';
+								txt += '						<img onclick=window.open("'+ item.img.split(",")[x] +'") src="'+ item.img.split(",")[x] +'" />';
+								txt += '					</li>';
+														}
+													}
+								txt += '		</ul>';
+								txt += '	</div>';
+											}	
+								txt += '</div>';
+							}
+							if(n == 0){
+								$(".dynamicSignList").html(txt);
+							}else{
+								$(".dynamicSignList").append(txt);
+							}
+						}else{
+							layer.msg("暂无数据");
+						}
+					}else{
+						layer.msg(data.resultMessage);
+					}
+				}
+			});
+		}
+	</script>
+</html>	

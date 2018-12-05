@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>订单</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+	<ion-view show-tabs>
+		<div class="bar bar-header contractHeader">
+			<ul>
+				<li ng-class="{true:'cur',false:''}[menuIndex == 0]" ng-click="contractMenu(0,0)">
+					<span>全部</span>
+				</li>
+				<li ng-class="{true:'cur',false:''}[menuIndex == 1]" ng-click="contractMenu(1,2)">
+					<span>待发货</span>
+				</li>
+				<li ng-class="{true:'cur',false:''}[menuIndex == 2]" ng-click="contractMenu(2,3)">
+					<span>待收货</span>
+				</li>
+				<li ng-class="{true:'cur',false:''}[menuIndex == 5]" ng-click="contractMenu(5,5)">
+					<span>已拒绝</span>
+				</li>
+			</ul>
+		</div>
+		<ion-content>
+			<div style="height: 58px;"></div>
+			<!-- list -->
+			<div class="orderList">
+				<!--item-->
+				<div class="orderItem" ng-repeat="item in signData">
+					<div class="orderItemHeader">
+						<span class="shopName">{{item.distributorName}}</span>
+						<em class="status" ng-if="item.status == 1">待确认</em>
+						<em class="status" ng-if="item.status == 2">待发货</em>
+						<em class="status" ng-if="item.status == 3">待收货</em>
+						<em class="status" ng-if="item.status == 4">已完成</em>
+						<em class="status" ng-if="item.status == 5">已取消</em>
+					</div>
+					<div class="orderItemContent">
+						<ul>
+							<li ng-repeat="items in item.listOrder">
+								<img src="{{items.img}}" />
+							</li>
+						</ul>
+					</div>
+					<div class="orderItemFooter">
+						<span>订单编号：{{item.orderNo}}</span>
+						<a href="#orderDateil?id={{item.id}}">查看详情</a>
+					</div>
+				</div>
+				<!--item end-->
+			</div>
+			<!-- list end -->
+			<ion-infinite-scroll on-infinite="loadMore()" ng-if="moreDataCanBeLoaded"></ion-infinite-scroll>
+		</ion-content>
+	</ion-view>	
+  </body>
+</html>

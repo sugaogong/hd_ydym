@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<meta charset="UTF-8">
+		<title>一店一码</title>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/ionic.min.css" />
+		<link rel="stylesheet" href="css/swiper.min.css" />
+		<link rel="stylesheet" href="css/layer.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+		<script type="text/javascript" src="js/md5.js" ></script>
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=e94d4cfe14c2de50b2b9a378a766ad88&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.ToolBar"></script>
+		<script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js" ></script>
+		<script type="text/javascript" src="js/ionic.bundle.min.js" ></script>
+		<script type="text/javascript" src="js/ionic-native-transitions.min.js" ></script>
+		<script type="text/javascript" src="js/angular-waterfall.js" ></script>
+		<script type="text/javascript" src="js/layer.js" ></script>
+		<script type="text/javascript" src="js/swiper.min.js" ></script>
+		<script type="text/javascript" src="js/sha.js" ></script>
+		<script type="text/javascript" src="js/jquery.qrcode.min.js" ></script>
+		<script type="text/javascript" src="js/view.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="homeCtrl">
+       	<ion-nav-view></ion-nav-view>
+	    <ion-footer-bar id="footer" class="bar bar-footer bar-balanced" ng-class="{'tabs-item-hide': $root.hideTabs}">
+	      	<nav>
+	      		<a href="#brand" class="nav_1" ng-class="$root.menu == 1?'selected':''">
+	      			<span>品牌</span>
+	      		</a>
+	      		<a href="#activity" class="nav_2" ng-class="$root.menu == 2?'selected':''">
+	      			<span>活动</span>
+	      		</a>
+	      		<a href="#index" class="nav_3" ng-class="$root.menu == 3?'selected':''">
+	      			<span>签约</span>
+	      		</a>
+	      		<a href="#order" class="nav_5" ng-class="$root.menu == 5?'selected':''">
+	      			<span>订单</span> 
+	      		</a>
+	      		<a href="#userCenter" class="nav_4" ng-class="$root.menu == 4?'selected':''">
+	      			<span>我的</span> 
+	      		</a>
+	      	</nav>
+	    </ion-footer-bar>
+	</body>
+</html>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymDistributorProductDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.user_id AS "userId",
+		a.product_id AS "productId",
+		a.stock AS "stock",
+		a.real_stock AS "realStock",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.price AS "price"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_distributor_product` a 
+	</sql>
+	
+	<select id="get" resultType="YwymDistributorProduct">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_distributor_product` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymDistributorProduct">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_distributor_product` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymDistributorProduct">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+		<if test="userId != null and userId != ''">
+    		AND a.user_id = #{userId}
+    	</if>
+		<if test="productId != null and productId != ''">
+    		AND a.product_id = #{productId}
+    	</if>
+		<if test="stock != null and stock != ''">
+    		AND a.stock = #{stock}
+    	</if>
+		<if test="realStock != null and realStock != ''">
+    		AND a.real_stock = #{realStock}
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+		<if test="price != null and price != ''">
+    		AND a.price = #{price}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_distributor_product(
+		            	id,
+        	user_id,
+        	product_id,
+        	stock,
+        	real_stock,
+        	create_date,
+        	update_date,
+        	price
+		) VALUES (
+		            	#{id},
+        	#{userId},
+        	#{productId},
+        	#{stock},
+        	#{realStock},
+        	#{createDate},
+        	#{updateDate},
+        	#{price}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_distributor_product SET 	
+		    			user_id = #{userId},
+			product_id = #{productId},
+			stock = #{stock},
+			real_stock = #{realStock},
+			create_date = #{createDate},
+			update_date = #{updateDate},
+			price = #{price}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_distributor_product
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

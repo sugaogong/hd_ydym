@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view hide-tabs>
+			<ion-content id="registerContent">
+				<ion-scroll>
+					<!--logo-->
+					<div class="loginLogo">
+						<img src="images/logo.png" />
+					</div>
+					<!--logo end-->
+					<!--main-->
+					<div class="registerMain">
+						<!--header-->
+						<div class="loginHeader">
+							<span>合同签署</span>
+							<em>Agreement</em>
+						</div>
+						<!--header end-->
+						<!-- desc -->
+						<div class="contractDesc">
+							<ion-scroll class="scroll">
+								<div ng-bind-html="data.agreement"></div>
+							</ion-scroll>						
+						</div>
+						<!-- desc end-->
+						<div class="canvasOuter">
+							<div class="signCanvas">
+								<p>
+									<a href="javascript:void(0)" ng-click="openAgreementSign()">点击签名</a>
+								</p>
+								<p>
+									<img id="qmimg"/>
+								</p>
+								<p ng-if="AgreementSign == 1">
+									<a href="javascript:void(0)" class="submissionAudit" ng-click="submissionAudit()">提交审核</a>
+								</p>
+							</div>
+ 	
+						</div>
+					</div>
+					<!--main end-->
+				</ion-scroll>
+			</ion-content>
+		</ion-view>	
+		<!-- mask -->
+		<div class="contractDescMask">
+			<div class="contractDescMaskOuter">
+				<div class="contractDescMaskHeader">
+					<span>手写签名</span>
+					<a href="javascript:void(0)"  ng-click="closeAgreementSign()"></a>
+				</div>
+				<div class="contractDescMaskCont">
+					<dl>
+						<dt>
+							<canvas id="canvas"></canvas>
+						</dt>
+						<dd>
+ 							<input type="button" value="清除" id="clear" ng-click="clearCanvas()"/>
+						 	<input type="button" value="确认" id="submit" ng-click="submitCanvas()" />
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		<!-- mask end -->
+	</body>
+</html>

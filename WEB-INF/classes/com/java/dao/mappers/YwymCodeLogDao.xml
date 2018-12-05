@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymCodeLogDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.send_id AS "sendId",
+		a.send_name AS "sendName",
+		a.receive_id AS "receiveId",
+		a.receive_name AS "receiveName",
+		a.code_id AS "codeId",
+		a.code_name AS "codeName",
+		a.nums AS "nums",
+		a.type AS "type",
+		a.remarks AS "remarks",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_code_log` a 
+	</sql>
+	
+	<select id="get" resultType="YwymCodeLog">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_code_log` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymCodeLog">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_code_log` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymCodeLog">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+		<if test="sendId != null and sendId != ''">
+    		AND a.send_id = #{sendId}
+    	</if>
+		<if test="sendName != null and sendName != ''">
+    		AND a.send_name = #{sendName}
+    	</if>
+		<if test="receiveId != null and receiveId != ''">
+    		AND a.receive_id = #{receiveId}
+    	</if>
+		<if test="receiveName != null and receiveName != ''">
+    		AND a.receive_name = #{receiveName}
+    	</if>
+		<if test="codeId != null and codeId != ''">
+    		AND a.code_id = #{codeId}
+    	</if>
+		<if test="codeName != null and codeName != ''">
+    		AND a.code_name = #{codeName}
+    	</if>
+		<if test="nums != null and nums != ''">
+    		AND a.nums = #{nums}
+    	</if>
+		<if test="type != null and type != ''">
+    		AND a.type = #{type}
+    	</if>
+		<if test="remarks != null and remarks != ''">
+    		AND a.remarks = #{remarks}
+    	</if>
+    	<if test="minNum != null and minNum != ''">
+    		AND <![CDATA[CONVERT(a.nums,SIGNED) >= #{minNum,jdbcType=INTEGER}]]>
+    	</if>
+    	<if test="maxNum != null and maxNum != ''">
+    		AND <![CDATA[CONVERT(a.nums,SIGNED) <= #{maxNum,jdbcType=INTEGER}]]>
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}	
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    	
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_code_log(
+		            	id,
+        	send_id,
+        	send_name,
+        	receive_id,
+        	receive_name,
+        	code_id,
+        	code_name,
+        	nums,
+        	type,
+        	remarks,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{sendId},
+        	#{sendName},
+        	#{receiveId},
+        	#{receiveName},
+        	#{codeId},
+        	#{codeName},
+        	#{nums},
+        	#{type},
+        	#{remarks},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_code_log SET 	
+		    			send_id = #{sendId},
+			send_name = #{sendName},
+			receive_id = #{receiveId},
+			receive_name = #{receiveName},
+			code_id = #{codeId},
+			code_name = #{codeName},
+			nums = #{nums},
+			type = #{type},
+			remarks = #{remarks},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_code_log
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

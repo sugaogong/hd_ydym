@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>业务员详情</title>
+	</head>
+	<body>
+		<ion-view hide-tabs>
+			<ion-content>
+				<!--info-->
+				<div class="salesmanInfo">
+					<span class="userImg">
+						<img ng-src="{{salesmanData.shopImg}}" />
+					</span>
+					<dl>
+						<dt>{{salesmanData.shopName}}<span>(业务员)</span></dt>
+						<dd>{{salesmanData.address}}</dd>
+					</dl>
+				</div>
+				<!--info end-->
+				<!--list-->
+				<div class="salesmanList">
+					<ul>
+						<li>
+							<span class="label">下属商家</span>
+							<p>{{salesmanData.subordinate}}家</p>
+						</li>
+						<li>
+							<span class="label">签约总数</span>
+							<p>{{salesmanData.signNums}}起</p>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<span class="label">联系方式</span>
+							<p><a href="tel:{{salesmanData.phone}}">{{salesmanData.phone}}</a></p>
+						</li>
+					</ul>
+				</div>
+				<!--list end-->
+			</ion-content>
+		</ion-view>	
+	</body>
+</html>

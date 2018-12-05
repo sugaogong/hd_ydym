@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymUserDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.shop_name AS "shopName",
+		a.name AS "name",
+		a.card_No AS "cardNo",
+		a.business_Img AS "businessImg",
+		a.first_Login AS "firstLogin",
+		a.identity_card AS "identityCard",
+		a.provinceId AS "provinceId",
+		a.cityId AS "cityId",
+		a.districtId AS "districtId",
+		a.address AS "address",
+		a.longitude AS "longitude",
+		a.latitude AS "latitude",
+		a.shop_img AS "shopImg",
+		a.password AS "password",
+		a.phone AS "phone",
+		a.wallet AS "wallet",
+		a.user_no AS "userNo",
+		a.user_type AS "userType",
+		a.auto_status AS "autoStatus",
+		a.login_status AS "loginStatus",
+		a.remark AS "remark",
+		a.open_id AS "openId",
+		a.admin_id AS "adminId",
+		a.distributor_id AS "distributorId",
+		a.identifier AS "identifier",
+		a.alipay AS "alipay",
+		a.area AS "area",
+		a.fax AS "fax",
+		a.customer_form AS "customerForm",
+		a.order_to AS "orderTo",
+		a.organize AS "organize",
+		a.shouyin_num AS "shouyinNum",
+		a.huojia_num AS "huojiaNum",
+		a.sku_num AS "skuNum",
+		a.bingke_num AS "bingkeNum",
+		a.bingyi_num AS "bingyiNum",
+		a.shang_level AS "shangLevel",
+		a.paijing AS "paijing",
+		a.wx_id AS "wxId",
+		a.kehu_level AS "kehuLevel",
+		a.yingyebu AS "yingyebu",
+		a.gongsi AS "gongsi",
+		a.zhibiaozu AS "zhibiaozu",
+		a.chuang_date AS "chuangDate",
+		a.status AS "status",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_user` a 
+		<if test="adminIdTemp != null and adminIdTemp != ''">
+    		, `ywym_admin` m
+    	</if>
+	</sql>
+	
+	<select id="get" resultType="YwymUser">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_user` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymUser">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_user` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymUser">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+    	<if test="adminIdTemp != null and adminIdTemp != ''">
+    		and a.id = m.user_id and m.admin_id = #{adminIdTemp} 
+    	</if>
+		<if test="shopName != null and shopName != ''">
+    		AND a.shop_name LIKE concat('%',#{shopName},'%')
+    	</if>
+		<if test="name != null and name != ''">
+    		AND a.name LIKE concat('%',#{name},'%')
+    	</if>
+		<if test="identityCard != null and identityCard != ''">
+    		AND a.identity_card = #{identityCard}
+    	</if>
+		<if test="cardNo != null and cardNo != ''">
+    		AND a.card_No = #{cardNo}
+    	</if>
+		<if test="login != null and login != ''">
+    		AND (a.phone = #{login} or  a.user_no = #{login}) 
+    	</if>
+		<if test="firstLogin != null and firstLogin != ''">
+    		AND a.first_Login = #{firstLogin}
+    	</if>
+		<if test="provinceId != null and provinceId != ''">
+    		AND a.provinceId = #{provinceId}
+    	</if>
+		<if test="cityId != null and cityId != ''">
+    		AND a.cityId = #{cityId}
+    	</if>
+		<if test="districtId != null and districtId != ''">
+    		AND a.districtId = #{districtId}
+    	</if>
+		<if test="address != null and address != ''">
+    		AND a.address = #{address}
+    	</if>
+		<if test="shopImg != null and shopImg != ''">
+    		AND a.shop_img = #{shopImg}
+    	</if>
+		<if test="password != null and password != ''">
+    		AND a.password = #{password}
+    	</if>
+		<if test="phone != null and phone != ''">
+    		AND a.phone = #{phone}
+    	</if>
+		<if test="adminId != null and adminId != ''">
+    		AND a.admin_id = #{adminId}
+    	</if>
+		<if test="distributorId != null and distributorId != ''">
+    		AND a.distributor_id = #{distributorId} 
+    	</if>
+		<if test="identifier != null and identifier != ''">
+    		AND a.identifier like '${identifier}%' and id != #{id}
+    	</if>
+		<if test="userNo != null and userNo != ''">
+    		AND a.user_no = #{userNo}
+    	</if>
+		<if test="userType != null and userType != ''">
+    		AND a.user_type = #{userType}
+    	</if>
+		<if test="adminDistributor != null and adminDistributor != ''">
+    		AND (a.user_type = '2' or a.user_type = '3')
+    	</if>
+		<if test="autoStatus != null and autoStatus != ''">
+    		AND a.auto_status = #{autoStatus}
+    	</if>
+		<if test="loginStatus != null and loginStatus != ''">
+    		AND a.login_status = #{loginStatus}
+    	</if>
+		<if test="remark != null and remark != ''">
+    		AND a.remark = #{remark}
+    	</if>
+		<if test="openId != null and openId != ''">
+    		AND a.open_id = #{openId}
+    	</if>
+		<if test="alipay != null and alipay != ''">
+    		AND a.alipay = #{alipay}
+    	</if>
+    	<if test="area != null and area != ''">
+    		AND a.area = #{area}
+    	</if>
+    	<if test="fax != null and fax != ''">
+    		AND a.fax = #{fax}
+    	</if>
+    	<if test="customerForm != null and customerForm != ''">
+    		AND a.customer_form = #{customerForm}
+    	</if>
+    	<if test="orderTo != null and orderTo != ''">
+    		AND a.order_to = #{orderTo}
+    	</if>
+    	<if test="organize != null and organize != ''">
+    		AND a.organize = #{organize}
+    	</if>
+    	<if test="shouyinNum != null and shouyinNum != ''">
+    		AND a.shouyin_num = #{shouyinNum}
+    	</if>
+    	<if test="huojiaNum != null and huojiaNum != ''">
+    		AND a.huojia_num = #{huojiaNum}
+    	</if>
+    	<if test="skuNum != null and skuNum != ''">
+    		AND a.sku_num = #{skuNum}
+    	</if>
+    	<if test="bingkeNum != null and bingkeNum != ''">
+    		AND a.bingke_num = #{bingkeNum}
+    	</if>
+    	<if test="bingyiNum != null and bingyiNum != ''">
+    		AND a.bingyi_num = #{bingyiNum}
+    	</if>
+    	<if test="shangLevel != null and shangLevel != ''">
+    		AND a.shang_level = #{shangLevel}
+    	</if>
+    	<if test="paijing != null and paijing != ''">
+    		AND a.paijing = #{paijing}
+    	</if>
+    	<if test="wxId != null and wxId != ''">
+    		AND a.wx_id = #{wxId}
+    	</if>
+    	<if test="kehuLevel != null and kehuLevel != ''">
+    		AND a.kehu_level = #{kehuLevel}
+    	</if>
+    	<if test="yingyebu != null and yingyebu != ''">
+    		AND a.yingyebu = #{yingyebu}
+    	</if>
+    	<if test="gongsi != null and gongsi != ''">
+    		AND a.gongsi = #{gongsi}
+    	</if>
+    	<if test="zhibiaozu != null and zhibiaozu != ''">
+    		AND a.zhibiaozu = #{zhibiaozu}
+    	</if>
+    	<if test="chuangDate != null and chuangDate != ''">
+    		AND a.chuang_date = #{chuangDate}
+    	</if>
+    	<if test="status != null and status != ''">
+    		AND a.status = #{status}
+    	</if>
+    	<if test="typeysb != null and typeysb != ''">
+    		AND (a.user_type = '2' or a.user_type = '4' or a.user_type = '5')
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_user(
+		            	id,
+        	shop_name,
+        	name,
+        	first_Login,
+        	card_No,
+        	business_Img,
+        	identity_card,
+        	provinceId,
+        	cityId,
+        	districtId,
+        	address,
+        	longitude,
+        	latitude,
+        	shop_img,
+        	password,
+        	phone,
+        	user_no,
+        	user_type,
+        	auto_status,
+        	login_status,
+        	remark,
+        	wallet,
+        	open_id,
+        	admin_id,
+        	distributor_id,
+        	alipay,
+        	identifier,
+        	area,
+        	fax,
+        	customer_form,
+        	order_to,
+        	organize,
+        	shouyin_num,
+        	huojia_num,
+        	sku_num,
+        	bingke_num,
+        	bingyi_num,
+        	shang_level,
+        	paijing,
+        	wx_id,
+        	kehu_level,
+        	yingyebu,
+        	gongsi,
+        	zhibiaozu,
+        	chuang_date,
+        	status,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{shopName},
+        	#{name},
+        	#{firstLogin},
+        	#{cardNo},
+        	#{businessImg},
+        	#{identityCard},
+        	#{provinceId},
+        	#{cityId},
+        	#{districtId},
+        	#{address},
+        	#{longitude},
+        	#{latitude},
+        	#{shopImg},
+        	#{password},
+        	#{phone},
+        	#{userNo},
+        	#{userType},
+        	#{autoStatus},
+        	#{loginStatus},
+        	#{remark},
+        	#{wallet},
+        	#{openId},
+        	#{adminId},
+        	#{distributorId},
+        	#{alipay},
+        	#{identifier},
+        	#{area},
+        	#{fax},
+        	#{customerForm},
+        	#{orderTo},
+        	#{organize},
+        	#{shouyinNum},
+        	#{huojiaNum},
+        	#{skuNum},
+        	#{bingkeNum},
+        	#{bingyiNum},
+        	#{shangLevel},
+        	#{paijing},
+        	#{wxId},
+        	#{kehuLevel},
+        	#{yingyebu},
+        	#{gongsi},
+        	#{zhibiaozu},
+        	#{chuangDate},
+        	#{status},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_user SET 	
+   			shop_name = #{shopName},
+   			name = #{name},
+   			first_Login = #{firstLogin},
+   			card_No = #{cardNo},
+   			business_Img = #{businessImg},
+			identity_card = #{identityCard},
+			provinceId = #{provinceId},
+			cityId = #{cityId},
+			districtId = #{districtId},
+			address = #{address},
+			longitude = #{longitude},
+			latitude = #{latitude},
+			shop_img = #{shopImg},
+			password = #{password},
+			phone = #{phone},
+			user_no = #{userNo},
+			user_type = #{userType},
+			auto_status = #{autoStatus},
+			login_status = #{loginStatus},
+			remark = #{remark},
+			open_id = #{openId},
+			admin_id = #{adminId},
+			distributor_Id = #{distributorId},
+			alipay = #{alipay},
+			wallet = #{wallet},
+			identifier = #{identifier},
+			area = #{area},
+			fax = #{fax},
+			customer_form = #{customerForm},
+			order_to = #{orderTo},
+			organize = #{organize},
+			shouyin_num = #{shouyinNum},
+			huojia_num = #{huojiaNum},
+			sku_num = #{skuNum},
+			bingke_num = #{bingkeNum},
+			bingyi_num = #{bingyiNum},
+			shang_level = #{shangLevel},
+			paijing = #{paijing},
+			wx_id = #{wxId},
+			kehu_level = #{kehuLevel},
+			yingyebu = #{yingyebu},
+			gongsi = #{gongsi},
+			zhibiaozu = #{zhibiaozu},
+			chuang_date = #{chuangDate},
+			status = #{status},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_user
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

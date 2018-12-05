@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymOrderDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.title AS "title",
+		a.img AS "img",
+		a.product_id AS "productId",
+		a.type_id AS "typeId",
+		a.user_id AS "userId",
+		a.product_nums AS "productNums",
+		a.total_order_id AS "totalOrderId",
+		a.total AS "total",
+		a.specifications AS "specifications",
+		a.remarks AS "remarks",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_order` a 
+	</sql>
+	
+	<select id="get" resultType="YwymOrder">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_order` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymOrder">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_order` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymOrder">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+		<if test="title != null and title != ''">
+    		AND a.title = #{title}
+    	</if>
+		<if test="img != null and img != ''">
+    		AND a.img = #{img}
+    	</if>
+		<if test="productId != null and productId != ''">
+    		AND a.product_id = #{productId}
+    	</if>
+		<if test="typeId != null and typeId != ''">
+    		AND a.type_id = #{typeId}
+    	</if>
+		<if test="userId != null and userId != ''">
+    		AND a.user_id = #{userId}
+    	</if>
+		<if test="productNums != null and productNums != ''">
+    		AND a.product_nums = #{productNums}
+    	</if>
+		<if test="totalOrderId != null and totalOrderId != ''">
+    		AND a.total_order_id = #{totalOrderId}
+    	</if>
+		<if test="total != null and total != ''">
+    		AND a.total = #{total}
+    	</if>
+		<if test="specifications != null and specifications != ''">
+    		AND a.specifications = #{specifications}
+    	</if>
+		<if test="remarks != null and remarks != ''">
+    		AND a.remarks = #{remarks}
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_order(
+		            	id,
+        	title,
+        	img,
+        	product_id,
+        	type_id,
+        	user_id,
+        	product_nums,
+        	total_order_id,
+        	total,
+        	specifications,
+        	remarks,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{title},
+        	#{img},
+        	#{productId},
+        	#{typeId},
+        	#{userId},
+        	#{productNums},
+        	#{totalOrderId},
+        	#{total},
+        	#{specifications},
+        	#{remarks},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_order SET 	
+		    			title = #{title},
+			img = #{img},
+			product_id = #{productId},
+			type_id = #{typeId},
+			user_id = #{userId},
+			product_nums = #{productNums},
+			total_order_id = #{totalOrderId},
+			total = #{total},
+			specifications = #{specifications},
+			remarks = #{remarks},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_order
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>

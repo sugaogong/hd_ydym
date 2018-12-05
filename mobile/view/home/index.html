@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ion-view show-tabs class="userContentView">
+			<ion-content class="show-footer">
+				<!--exit-->
+				<a href="javascript:;" ng-click="exit()" id="exit_btn"></a>
+				<!--exit end-->
+				<!--userImg-->
+				<div class="userImg">
+					<span>
+						<img src="{{userData.shopImg}}" />
+					</span>
+				</div>	
+				<!--userImg end-->
+				<!--userInfo-->
+				<div class="userInfo">
+					<div class="userInfoMain">
+						<dl>
+							<dt>{{userData.shopName}}</dt>
+							<dd>{{userData.address}}</dd>
+						</dl>
+					</div>
+					<!--<div class="userInfoFooter">
+						<span>账户余额（元）：<em>{{userData.wallet}}</em></span>
+						 <a href="#">明细</a>
+					</div> -->
+				</div>
+				<!--userInfo end-->
+				<!--menu-->
+				<div class="userContentMenu">
+					<!--item-->
+					<div class="userContentMenuItem">
+						<a href="#personaldata">
+							<span class="icon">
+								<img src="images/icon_grzl.png" />
+							</span>
+							<p>个人资料</p>
+						</a>
+					</div>
+					<!--item end-->
+					<!--item-->
+					<div class="userContentMenuItem">
+						<a href="#myContract">
+							<span class="icon">
+								<img src="images/icon_qyuec.png" />
+							</span>
+							<p>我的签约</p>
+						</a>
+					</div>
+					<!--item end-->
+					<!--item-->
+					<div class="userContentMenuItem">
+						<a href="#myCardVoucher">
+							<span class="icon">
+								<img src="images/icon_kaquan.png" />
+							</span>
+							<p>我的卡券</p>
+						</a>
+					</div>
+					<!--item end-->
+				</div>
+				<!--menu end-->
+			</ion-content>
+		</ion-view>	
+	</body>
+</html>

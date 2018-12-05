@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.YwymSignDao">
+
+	<sql id="tableColumns">
+			a.id AS "id",
+		a.sign_type AS "signType",
+		a.product_id AS "productId",
+		a.product_Num AS "productNum",
+		a.explains AS "explains",
+		a.contract_time AS "contractTime",
+		a.end_time AS "endTime",
+		a.total AS "total",
+		a.user_id AS "userId",
+		a.admin_id AS "adminId",
+		a.remark AS "remark",
+		a.reason AS "reason",
+		a.status AS "status",
+		a.img AS "img",
+		a.sign_Img AS "signImg",
+		a.agreement AS "agreement",
+		a.send_type AS "sendType",
+		a.send_time AS "sendTime",
+		a.product_sign_id AS "productSignId",
+		a.end_id AS "endId",
+		a.sales_id AS "salesId",
+		a.code AS "code",
+		a.change_time AS "changeTime",
+		a.import_sign AS "importSign",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="fromTable">
+		`ywym_sign` a 
+		<if test="adminSysId != null and adminSysId != ''">
+			, `ywym_user` u
+		</if>
+	</sql>
+	
+	<select id="get" resultType="YwymSign">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_sign` a 
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="fromTable" resultType="YwymSign">
+		SELECT 
+			<include refid="tableColumns"/>
+		FROM 
+			`ywym_sign` a ${sql }
+	</select>
+	
+	<select id="findListSQL" resultType="java.util.HashMap">
+		${sql }
+	</select>
+	
+    <select id="findList" resultType="YwymSign">
+        SELECT 
+	        <include refid="tableColumns"/>
+        FROM 
+        	<include refid="fromTable"/>
+        <where>
+        	<include refid="whereSQL"/>
+        </where>
+        <choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date DESC
+			</otherwise>
+		</choose>
+        <if test="first != null and max != null">
+			LIMIT #{first},#{max}
+		</if>
+    </select>
+    
+    <sql id="whereSQL">
+    	<if test="adminBuSysId != null and adminBuSysId != ''">
+    		a.admin_id in (SELECT u.id from ywym_user u where u.admin_id in   
+  			(SELECT id from ywym_user where admin_id = #{adminBuSysId}) )      
+    	</if>
+    	<if test="adminSysId != null and adminSysId != ''">
+			and a.admin_id = u.id and u.admin_id =#{adminSysId}
+		</if>
+		<if test="buStatus != null and buStatus != ''">
+			and a.status in (3,10) 
+		</if>
+		<if test="signType != null and signType != ''">
+    		AND a.sign_type = #{signType}
+    	</if>
+		<if test="sendType != null and sendType != ''">
+    		AND a.send_Type = #{sendType}
+    	</if>
+		<if test="productId != null and productId != ''">
+    		AND a.product_id = #{productId}
+    	</if>
+		<if test="contractTime != null and contractTime != ''">
+    		AND a.contract_time = #{contractTime}
+    	</if>
+		<if test="endTime != null and endTime != ''">
+    		AND a.end_time = #{endTime}
+    	</if>
+		<if test="total != null and total != ''">
+    		AND a.total = #{total}
+    	</if>
+		<if test="userId != null and userId != ''">
+    		AND a.user_id = #{userId}
+    	</if>
+		<if test="adminId != null and adminId != ''">
+    		AND a.admin_id = #{adminId}
+    	</if>
+		<if test="remark != null and remark != ''">
+    		AND a.remark = #{remark}
+    	</if>
+		<if test="reason != null and reason != ''">
+    		AND a.reason = #{reason}
+    	</if>
+		<if test="status != null and status != ''">
+    		AND a.status = #{status}
+    	</if>
+		<if test="signStatus != null and signStatus != ''">
+    		AND (a.status = '2' or a.status = '3' or a.status = '5')
+    	</if>
+		<if test="img != null and img != ''">
+    		AND a.img = #{img}
+    	</if>
+    	<if test="productSignId != null and productSignId != ''">
+    		AND a.product_sign_id = #{productSignId}
+    	</if>
+    	<if test="endId != null and endId != ''">
+    		AND a.end_id = #{endId}
+    	</if>
+    	<if test="salesId != null and salesId != ''">
+    		AND a.sales_id = #{salesId}
+    	</if>
+    	<if test="code != null and code != ''">
+    		AND a.code = #{code}
+    	</if>
+    	<if test="changeTime != null and changeTime != ''">
+    		AND a.change_time = #{changeTime}
+    	</if>
+    	<if test="importSign != null and importSign != ''">
+    		AND a.import_sign = #{importSign}
+    	</if>
+		<if test="createDate != null and createDate != ''">
+    		AND a.create_date = #{createDate}
+    	</if>
+		<if test="updateDate != null and updateDate != ''">
+    		AND a.update_date = #{updateDate}
+    	</if>
+	    <if test="createDateStart != null and createDateStart != '' and createDateEnd != null and createDateEnd != ''">
+    		AND a.create_date BETWEEN #{createDateStart} AND #{createDateEnd}
+    	</if>
+    	<if test="updateDateStart != null and updateDateStart != '' and updateDateEnd != null and updateDateEnd != ''">
+    		AND a.update_date BETWEEN #{updateDateStart} AND #{updateDateEnd}
+    	</if>
+    </sql>
+    
+    <insert id="insert">
+		INSERT INTO ywym_sign(
+		            	id,
+        	sign_type,
+        	product_id,
+        	send_Type,
+        	product_Num,
+        	explains,
+        	contract_time,
+        	end_time,
+        	total,
+        	user_id,
+        	admin_id,
+        	remark,
+        	reason,
+        	status,
+        	img,
+        	sign_Img,
+        	agreement,
+        	code,
+        	change_time,
+        	import_sign,
+        	create_date,
+        	update_date
+		) VALUES (
+		            	#{id},
+        	#{signType},
+        	#{productId},
+        	#{sendType},
+        	#{productNum},
+        	#{explains},
+        	#{contractTime},
+        	#{endTime},
+        	#{total},
+        	#{userId},
+        	#{adminId},
+        	#{remark},
+        	#{reason},
+        	#{status},
+        	#{img},
+        	#{signImg},
+        	#{agreement},
+        	#{code},
+        	#{changeTime},
+        	#{importSign},
+        	#{createDate},
+        	#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ywym_sign SET 	
+		    			sign_type = #{signType},
+			product_id = #{productId},
+			send_Type = #{sendType},
+			send_time = #{sendTime},
+			product_Num = #{productNum},
+			explains = #{explains},
+			contract_time = #{contractTime},
+			end_time = #{endTime},
+			total = #{total},
+			user_id = #{userId},
+			admin_id = #{adminId},
+			remark = #{remark},
+			reason = #{reason},
+			status = #{status},
+			img = #{img},
+			sign_Img = #{signImg},
+			agreement = #{agreement},
+			code = #{code},
+			change_time = #{changeTime},
+			import_sign = #{importSign},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="delete">
+		DELETE FROM ywym_sign
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			<include refid="fromTable"/>
+		<where>
+			<include refid="whereSQL"/>
+		</where>
+	</select>
+    
+</mapper>
